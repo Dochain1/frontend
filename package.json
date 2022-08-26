@@ -1,0 +1,41 @@
+{
+  "name": "frontend",
+  "version": "0.0.1",
+  "description": "This repo includes the frontend of the project Dochain.",
+  "main": "index.js",
+  "scripts": {
+    "dev": "next",
+    "build": "next build",
+    "start": "next start",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Dochain1/frontend.git"
+  },
+  "keywords": [],
+  "author": "Bárbaro Javier Valmaseda <hello@bjvalmaseda.com> (https://bjvalmaseda.com/)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Dochain1/frontend/issues"
+  },
+  "homepage": "https://github.com/Dochain1/frontend#readme",
+  "dependencies": {
+    "next": "^12.2.5",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
+  },
+  "devDependencies": {
+    "eslint": "^8.22.0",
+    "eslint-plugin-react": "^7.31.0",
+    "husky": "^8.0.1",
+    "eslint-config-prettier": "^8.5.0",
+    "eslint-plugin-prettier": "^4.2.1",
+    "prettier": "^2.7.1"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "npm prettier -w ."
+    }
+  }
+}
