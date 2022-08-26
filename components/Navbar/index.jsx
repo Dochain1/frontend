@@ -1,9 +1,10 @@
 import React from 'react';
 import Link from 'next/link';
+
 const Navbar = () => {
   return (
-    <nav>
-      <ul>
+    <nav className='navbar' >
+      <ul className='nav'>
         <li>
           <Link href="/">Inicio</Link>
         </li>
