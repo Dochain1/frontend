@@ -2,6 +2,7 @@ import React from 'react';
 import Link from 'next/link';
 import logo from '../../public/images/logo.png';
 import Image from 'next/image';
+import LoginButton from '../LoginButton';
 
 const Navbar = () => {
   return (
@@ -14,10 +15,8 @@ const Navbar = () => {
         <li>
           <Link href="/cases">Casos</Link>
         </li>
-      <button className='wallet-connect'>
-        Conectar wallet
-      </button>
-       </ul>
+        <LoginButton />
+      </ul>
     </nav>
   );
 };
