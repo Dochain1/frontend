@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useRouter } from 'next/router';
 
 const Case = () => {
+  // eslint-disable-next-line no-unused-vars
   const [documents, setDocuments] = useState(Array(5).fill());
 
   const {

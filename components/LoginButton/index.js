@@ -4,6 +4,7 @@ import { useEffect } from 'react';
 import useTruncatedAddress from '../../hooks/useTruncatedAddress';
 import { connector } from '../../config/web3';
 import { useCallback } from 'react';
+import { AiOutlineDisconnect } from 'react-icons/ai';
 
 const LoginButton = () => {
   const { account, activate, active, deactivate } = useWeb3React();
@@ -30,12 +31,16 @@ const LoginButton = () => {
       {active ? (
         /*Is show when user is logged*/
         <>
-          <div>{address}</div>
-          <button onClick={disconnect}>X</button>
+          <div className='bg-blue-500 p-2 rounded text-xl'>
+            {address}
+            <button onClick={disconnect}>
+              <AiOutlineDisconnect />
+            </button>
+          </div>
         </>
       ) : (
         /*Logging button*/
-        <button className="wallet-connect" onClick={connect}>
+        <button className='bg-orange-500 p-2 rounded text-xl' onClick={connect}>
           Conectar wallet
         </button>
       )}

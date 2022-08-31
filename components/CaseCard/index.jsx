@@ -3,6 +3,7 @@ import { MdPlace } from 'react-icons/md';
 import { BsUnlockFill, BsBriefcaseFill } from 'react-icons/bs';
 import { FaUserAlt, FaUserTie } from "react-icons/fa";
 
+// eslint-disable-next-line no-unused-vars
 const CaseCard = ({ item }) => {
   return<>  
   <div className="shadow-2xl max-w-sm w-full lg:max-w-full lg:flex rounded-2xl border-r border-b border-l border-t border-gray-400 lg:border-l lg:border-t lg:border-gray-400 bg-white  p-4 flex flex-col justify-between leading-normal">

@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import CaseCard from '../../components/CaseCard';
 
 const Cases = () => {
+  // eslint-disable-next-line no-unused-vars
   const [cases, setCases] = useState(Array(3).fill());
   return (
     <>
