@@ -4,8 +4,7 @@ import ComplaintDialog from '../components/ComplaintDialog';
 
 const Home = () => {
   return <>
-    <h1>Home</h1>
-    <ComplaintDialog/>
+     <ComplaintDialog/>
   </>;
 };
 export default Home;
