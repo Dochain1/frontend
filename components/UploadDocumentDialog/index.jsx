@@ -11,7 +11,7 @@ const UploadDocumentDialog = ({ caseId }) => {
       caseId
     });
 
-    const documentTypes = ['Prueba', 'Evidencia', 'Requerimiento', 'Memorial', 'Resolucion'];
+    const documentTypes = ['Evidencia', 'Memorial', 'Prueba', 'Requerimiento', 'Resolucion'];
 
     const onChangeHandler = (event) => {
       setUploadDocument({ ...uploadDocument, [event.target.name]: event.target.value });

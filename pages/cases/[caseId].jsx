@@ -7,11 +7,11 @@ const Case = () => {
   const [documents, setDocuments] = useState(Array(5).fill());
 
   const hashMapColorByTypeDocument = new Map([
-    [1,"bg-purple-200 text-purple-600"],
-    [2,"bg-green-200 text-green-600"],
-    [3,"bg-yellow-200 text-yellow-60"],
-    [4,"bg-red-200 text-red-600"],
-    [5,"bg-blue-200 text-blue-600"],
+    [1,{ color: "bg-purple-200 text-purple-600", typeDocument: "Evidencia"}],
+    [2,{ color: "bg-green-200 text-green-600", typeDocument: "Memorial"}],
+    [3,{ color: "bg-yellow-200 text-yellow-60", typeDocument: "Prueba"}],
+    [4,{ color: "bg-red-200 text-red-600", typeDocument: "Requerimiento"}],
+    [5,{ color: "bg-blue-200 text-blue-600", typeDocument: "Resolucion"}],
   ]);
 
   const {
@@ -57,7 +57,7 @@ const Case = () => {
                       31 Agosto 2022 - 18:00
                     </td>
                     <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                      <span className={`py-1 px-3 rounded-full text-xs ${hashMapColorByTypeDocument.get(index+1)}`}>Active</span>      
+                      <span className={`py-1 px-3 rounded-full text-xs ${hashMapColorByTypeDocument.get(index+1).color}`}>{hashMapColorByTypeDocument.get(index+1).typeDocument}</span>      
                     </td>
                     <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
                       <button type="button" className="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-2 py-1 bg-blue-600 text-base font-medium text-white hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 sm:ml-3 sm:w-auto sm:text-sm">Ver</button>
