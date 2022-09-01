@@ -2,6 +2,7 @@ import React from 'react';
 import { MdPlace } from 'react-icons/md';
 import { BsUnlockFill, BsBriefcaseFill } from 'react-icons/bs';
 import { FaUserAlt, FaUserTie } from "react-icons/fa";
+import Link from 'next/link';
 
 // eslint-disable-next-line no-unused-vars
 const CaseCard = ({ item }) => {
@@ -66,7 +67,9 @@ const CaseCard = ({ item }) => {
     </div>
     
     <div className="flex flex-row-reverse p-6 space-x-2 rounded-b border-t border-gray-200">
-      <button type="button" className="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-blue-600 text-base font-medium text-white hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 sm:ml-3 sm:w-auto sm:text-sm" >Ver</button>
+      <Link href={'/cases/' + item}>
+        <button type="button" className="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-blue-600 text-base font-medium text-white hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 sm:ml-3 sm:w-auto sm:text-sm">Ver</button>
+      </Link>
     </div>
   </div>
   </>
