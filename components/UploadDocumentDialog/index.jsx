@@ -1,5 +1,6 @@
 import { useWeb3React } from '@web3-react/core';
 import React, { useState, useEffect } from 'react';
+// eslint-disable-next-line no-unused-vars
 import { decryptData, decryptPGP, getPublicKey } from '../../utils/encrypt';
 
 const UploadDocumentDialog = ({ caseId }) => {
