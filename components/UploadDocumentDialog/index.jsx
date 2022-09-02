@@ -31,7 +31,7 @@ const UploadDocumentDialog = ({ caseId }) => {
       for (const key of keys) {
         formData.append('keys', key);
       }
-      formData.append('document', uploadDocument.documentFile.data);
+      formData.append('document', uploadDocument.documentFile);
       formData.append('documentName', uploadDocument.documentName);
       formData.append('documentType', uploadDocument.documentType);
       formData.append('dateAndTimeOfUploadDocument', uploadDocument.dateAndTimeOfUploadDocument);
