@@ -1,4 +1,5 @@
 import { encrypt } from '@metamask/eth-sig-util';
+import { useWeb3React } from '@web3-react/core';
 import {
   bufferToHex,
   fromRpcSig,
@@ -7,7 +8,6 @@ import {
   pubToAddress,
 } from 'ethereumjs-utils';
 import * as openpgp from 'openpgp';
-import Web3 from 'web3';
 
 export const encryptData = async (encryptionPublicKey) => {
   const encryptedMessage = await bufferToHex(
@@ -56,13 +56,13 @@ export const decryptPGP = async (encrypted, privateKeyArmored) => {
   return decrypted;
 };
 
-export const getPublicKey = async () => {
+export const getPublicKey = async (account) => {
   // const accounts = await web3.eth.getAccounts();
   let encryptionPublicKey;
   await ethereum
     .request({
       method: 'eth_getEncryptionPublicKey',
-      params: ["0x90C73FA3566BDAE5295452C1dAb4e3181e7383f6"], // you must have access to the specified account
+      params: [account], // you must have access to the specified account
     })
     .then((result) => {
       encryptionPublicKey = result;

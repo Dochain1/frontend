@@ -12,7 +12,7 @@ const LoginButton = () => {
   const connect = useCallback(() => {
     activate(connector);
     localStorage.setItem('previouslyConnected', 'true');
-  }, [activate]);
+  }, [active]);
 
   const disconnect = () => {
     deactivate();
@@ -22,7 +22,8 @@ const LoginButton = () => {
   //Do not disconnect when browser is refresh
   useEffect(() => {
     if (localStorage.getItem('previouslyConnected') === 'true') connect();
-  }, [connect]);
+    console.log(localStorage.getItem('previouslyConnected'));
+  }, []);
 
   const address = useTruncatedAddress(account);
 
@@ -31,7 +32,7 @@ const LoginButton = () => {
       {active ? (
         /*Is show when user is logged*/
         <>
-          <div className='bg-blue-500 p-2 rounded text-xl'>
+          <div className="bg-blue-500 p-2 rounded text-xl">
             {address}
             <button onClick={disconnect}>
               <AiOutlineDisconnect />
@@ -40,7 +41,7 @@ const LoginButton = () => {
         </>
       ) : (
         /*Logging button*/
-        <button className='bg-orange-500 p-2 rounded text-xl' onClick={connect}>
+        <button className="bg-orange-500 p-2 rounded text-xl" onClick={connect}>
           Conectar wallet
         </button>
       )}
