@@ -1,13 +1,21 @@
-import React from 'react';
-import { useWeb3React } from '@web3-react/core';
+import { UnsupportedChainIdError, useWeb3React } from '@web3-react/core';
 import { useEffect } from 'react';
 import useTruncatedAddress from '../../hooks/useTruncatedAddress';
 import { connector } from '../../config/web3';
 import { useCallback } from 'react';
-import { AiOutlineDisconnect } from 'react-icons/ai';
+import {
+  Flex,
+  Button,
+  Tag,
+  TagLabel,
+  TagCloseButton,
+} from "@chakra-ui/react";
+import { AddIcon } from "@chakra-ui/icons";
+
 
 const LoginButton = () => {
-  const { account, activate, active, deactivate } = useWeb3React();
+  const { account, activate, active, deactivate, error } = useWeb3React();
+  const isUnsupportedChain = error instanceof UnsupportedChainIdError;
 
   const connect = useCallback(() => {
     activate(connector);
@@ -24,27 +32,30 @@ const LoginButton = () => {
     if (localStorage.getItem('previouslyConnected') === 'true') connect();
   }, [connect]);
 
-  const address = useTruncatedAddress(account);
+  const truncatedAddress = useTruncatedAddress(account);
 
   return (
-    <div>
+    <Flex alignItems={"center"}>
       {active ? (
-        /*Is show when user is logged*/
-        <>
-          <div className='bg-blue-500 p-2 rounded text-xl'>
-            {address}
-            <button onClick={disconnect}>
-              <AiOutlineDisconnect />
-            </button>
-          </div>
-        </>
+        <Tag colorScheme="green" borderRadius="full">
+          <TagLabel>
+            {truncatedAddress}
+          </TagLabel>
+          <TagCloseButton onClick={disconnect} />
+        </Tag>
       ) : (
-        /*Logging button*/
-        <button className='bg-orange-500 p-2 rounded text-xl' onClick={connect}>
-          Conectar wallet
-        </button>
+        <Button
+          variant={"solid"}
+          colorScheme={"green"}
+          size={"sm"}
+          leftIcon={<AddIcon />}
+          onClick={connect}
+          disabled={isUnsupportedChain}
+        >
+          {isUnsupportedChain ? "Red no soportada" : "Conectar wallet"}
+        </Button>
       )}
-    </div>
+    </Flex>
   );
 };
 
