@@ -1,7 +1,24 @@
 import React, { useState } from 'react';
+import { 
+  Button,
+  Modal,
+  ModalContent,
+  ModalHeader,
+  ModalOverlay,
+  ModalBody,
+  ModalFooter,
+  FormControl,
+  FormLabel,
+  Select,
+  Input,
+  Textarea,
+  useDisclosure 
+} from '@chakra-ui/react';
+import { CloseIcon, AddIcon } from '@chakra-ui/icons';
+import { FaSave } from 'react-icons/fa';
 
 const UploadDocumentDialog = ({ caseId }) => {
-    const [showDialog, setShowDialog] = useState(false);
+    const { isOpen, onOpen, onClose } = useDisclosure()
     
     const [uploadDocument, setUploadDocument] = useState({
       documentName : "",
@@ -30,64 +47,80 @@ const UploadDocumentDialog = ({ caseId }) => {
         dateAndTimeOfUploadDocument : new Date(),
         caseId
       })
-      setShowDialog(false)
+      onClose();
     }
 
     return <>
-      <button className="block text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center xy-2 " type="button" onClick={() => setShowDialog(true)}>
-        Agregar Documento
-      </button>
-      
-      {showDialog ? (
-        <> 
-          <div className="fixed z-10 inset-0 overflow-y-auto" aria-labelledby="modal-title" role="dialog" a-modal="true">
-            <div className="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
-              <div className="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity" aria-hidden="true"></div>
-              
-              <div className="inline-block align-bottom  rounded-lg text-left overflow-hidden transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full">
-                <div className="bg-white rounded-lg overflow-hidden shadow-xl">
-                  <div className="flex justify-between items-center p-5 rounded-t border-b bg-slate-400">
-                    <h3 className="text-xl font-medium text-white">
-                    Agregar Documento
-                    </h3>
-                    <button type="button" className="bg-gray-200 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center" onClick={() => closeDialog()}>
-                        <svg aria-hidden="true" className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fillRule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clipRule="evenodd"></path></svg>
-                        <span className="sr-only">Close modal</span>
-                    </button>
-                  </div>
+      <Button
+        variant={"solid"}
+        colorScheme={"green"}
+        size={"sm"}
+        leftIcon={<AddIcon />}
+        onClick={onOpen}
+      >Agregar Documento
+      </Button>
 
-                  <div className="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4 ">
+      <Modal onClose={onClose} isOpen={isOpen}>
+        <ModalOverlay />
+        <ModalContent>
+          <ModalHeader>Agregar Documento</ModalHeader>
+          
+          <ModalBody>
+            <FormControl id="documentName" isRequired mb='10px'>
+              <FormLabel>Nombre del documento</FormLabel>
+              <Input
+                placeholder="Nombre del documento"
+                _placeholder={{ color: 'gray.500' }}
+                type="text"
+                name="documentName"
+                value={uploadDocument.documentName}
+                onChange={onChangeHandler}
+              />
+            </FormControl>
 
-                    <form className="space-y-6" action="#">
-                      <div>
-                          <label htmlFor="text" className="block mb-2 text-sm font-medium text-gray-900 ">Nombre del documento</label>
-                          <input type="text" name="documentName" id="text" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" placeholder="Tipo de denuncia" required value={uploadDocument.documentName} onChange={onChangeHandler}></input>
-                      </div>
-                      <div>
-                          <label htmlFor="text" className="block mb-2 text-sm font-medium text-gray-900 ">Tipo de documento</label>
-                          <select name="documentType" id="text" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" required value={uploadDocument.documentType} onChange={onChangeHandler}>
-                            {documentTypes.map((documentType, index) => {
-                              return <option value={`${documentType}`} key={index} className="bg-white border-b">{documentType}</option>;
-                            })}
-                          </select>
-                      </div>
-                      <div>
-                          <label htmlFor="text" className="block mb-2 text-sm font-medium text-gray-900 ">Seleccionar documento</label>
-                          <input type="file" name="documentFile" id="text" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" required value={uploadDocument.documentFile} onChange={onChangeHandler}></input>
-                      </div>
-                    </form>
-                  </div>
-                  
-                  <div className="flex flex-row-reverse p-6 space-x-2 rounded-b border-t border-gray-200">
-                    <button type="button" className="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-blue-600 text-base font-medium text-white hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 sm:ml-3 sm:w-auto sm:text-sm" onClick={() => saveUploadDocument()}>Aceptar</button>
-                    <button type="button" className="mt-3 w-full inline-flex justify-center rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-base font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm" onClick={() => closeDialog()}>Cancelar</button>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </>
-      ) : null}
+            <FormControl id="documentType" isRequired mb='10px'>
+              <FormLabel>Tipo de documento</FormLabel>
+              <Select placeholder='Tipo de documento' value={uploadDocument.documentType} onChange={onChangeHandler}>
+                {documentTypes.map((documentType, index) => {
+                  return <option value={`${documentType}`} key={index}>{documentType}</option>
+                })}
+              </Select>
+            </FormControl> 
+
+            <FormControl id="casePlace" isRequired mb='10px'>
+              <FormLabel>Lugar del caso</FormLabel>
+              <Input
+                placeholder="Lugar del caso"
+                _placeholder={{ color: 'gray.500' }}
+                type="file"
+                name="casePlace"
+                value={uploadDocument.casePlace}
+                onChange={onChangeHandler}
+              />
+            </FormControl>    
+          </ModalBody>
+
+          <ModalFooter>
+            <Button
+              variant={"solid"}
+              colorScheme={"red"}
+              size={"sm"}
+              leftIcon={<CloseIcon />}
+              onClick={() => closeDialog()}
+              mr={3}
+            >Cancelar
+            </Button>
+            <Button
+              variant={"solid"}
+              colorScheme={"green"}
+              size={"sm"}
+              leftIcon={<FaSave />}
+              onClick={() => saveUploadDocument()}
+            >Guardar
+            </Button>
+          </ModalFooter>
+        </ModalContent>
+      </Modal>
     </>;
 };
 

@@ -4,6 +4,7 @@ import UploadDocumentDialog from '../../components/UploadDocumentDialog';
 import {
   Box,
   Button,
+  Flex,
   Heading,
   Spacer,
   Tag,
@@ -40,8 +41,10 @@ const Case = () => {
         <Heading as="h2" fontSize="4xl" textAlign='center' p='0px'>
           Documentos del caso: {caseId}
         </Heading>
-        <Spacer/>
-        <UploadDocumentDialog caseId={caseId}/>
+      </Box>
+
+      <Box textAlign='right'>
+        <UploadDocumentDialog  caseId={caseId} alignItems="center"/>
       </Box>
 
       <TableContainer p="40px" mt="20px" borderRadius='10px' boxShadow='2xl'>
