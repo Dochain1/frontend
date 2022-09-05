@@ -191,10 +191,10 @@ const CaseCard = ({ item }) => {
               w='l'
               h='l'
               as={MdRemoveRedEye}
-              color={iconColor}
+              color='white'
             />
-            <Text textAlign="center" color={mainText} w='100%' fontSize='m'pl='4px'>
-              VER
+            <Text textAlign="center" color='white' w='100%' fontSize='m'pl='4px'>
+              Abrir
             </Text>
           </Button>
         </Link>
