@@ -59,7 +59,7 @@ const Case = () => {
           </Thead>
           <Tbody>
           {documents.map((_, index) => {
-            return <Tr>
+            return <Tr key={index}>
               <Td>Documento</Td>
               <Td textAlign="center">31 Agosto 2022 - 18:00</Td>
               <Td textAlign="center">
