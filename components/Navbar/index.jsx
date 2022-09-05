@@ -9,8 +9,8 @@ import {
   useDisclosure,
   Stack,
   Image,
-  Heading,
-  Link as DefaultLink, useColorModeValue
+  Link as DefaultLink, 
+  useColorModeValue
 } from "@chakra-ui/react";
 import { HamburgerIcon, CloseIcon } from "@chakra-ui/icons";
 

@@ -9,7 +9,7 @@ import {
 
 const Layout = ({ children }) => {
   return (
-    <Flex minH="100vh" direction="column">
+    <Box h='100vh' w='100%'>
       <Box
         mx="auto"
         maxW={"7xl"}
@@ -17,13 +17,22 @@ const Layout = ({ children }) => {
         bg={useColorModeValue("white", "gray.800")}
         px={4}
       >
-      <Navbar />
+        <Navbar />
       </Box>
-      <Box mx="auto" flex={1} p={4} maxW={"7xl"} width="100%">
-        {children}
-      </Box>
+
+      <Flex
+        flexDirection='column'
+        maxW='90%'
+        px='10px'
+        my='30px'
+        mx='auto'
+        py='auto'
+        borderRadius='20px'>
+          {children}
+      </Flex>     
+
       <Footer />
-    </Flex>
+    </Box>
   );
 };
 
