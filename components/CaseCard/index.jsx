@@ -186,7 +186,14 @@ const CaseCard = ({ item }) => {
             justify='center'
             borderRadius='12px'
             me='12px'
-            bg='green.400'>
+            bg='green.400'
+            rounded={'full'}
+            _hover={{
+              bg: 'green.500',
+            }}
+            _focus={{
+              bg: 'green.500',
+            }}>  
             <Icon
               w='l'
               h='l'
