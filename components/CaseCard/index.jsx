@@ -17,7 +17,7 @@ import {
 
 // eslint-disable-next-line no-unused-vars
 const CaseCard = ({ item }) => {
-  let boxBg = useColorModeValue("white !important", "#111c44 !important");
+  let boxBg = useColorModeValue("white !important", "#171923 !important");
   let secondaryBg = useColorModeValue("gray.50", "whiteAlpha.100");
   let mainText = useColorModeValue("gray.800", "white");
   let iconBox = useColorModeValue("green.400", "whiteAlpha.200");
@@ -25,7 +25,6 @@ const CaseCard = ({ item }) => {
   
   return <Box
     borderRadius='20px'
-    bg={boxBg}
     h='auto'
     w={{ base: "315px", md: "345px" }}
     direction='column'
@@ -36,7 +35,7 @@ const CaseCard = ({ item }) => {
         <Text
           textTransform="uppercase"
           textAlign="center"
-          bg={useColorModeValue("#111c44", "whiteAlpha.100")}
+          bg={useColorModeValue("#171923", "whiteAlpha.100")}
           px={5}
           color={useColorModeValue('gray.50', 'gray.300')}
           fontSize="xl"
@@ -180,29 +179,11 @@ const CaseCard = ({ item }) => {
         <Spacer/>
         <Link href={'/cases/' + item}>
           <Button
-            w='auto'
-            h='30px'
-            align='center'
-            justify='center'
-            borderRadius='12px'
-            me='12px'
-            bg='green.400'
-            rounded={'full'}
-            _hover={{
-              bg: 'green.500',
-            }}
-            _focus={{
-              bg: 'green.500',
-            }}>  
-            <Icon
-              w='l'
-              h='l'
-              as={MdRemoveRedEye}
-              color='white'
-            />
-            <Text textAlign="center" color='white' w='100%' fontSize='m'pl='4px'>
-              Abrir
-            </Text>
+            variant={"solid"}
+            colorScheme={"green"}
+            size={"sm"}
+            leftIcon={<MdRemoveRedEye />}
+          >Abrir
           </Button>
         </Link>
       </Flex>
