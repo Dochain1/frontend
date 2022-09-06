@@ -1,4 +1,5 @@
-import { Web3Provider } from '@ethersproject/providers';
+//import { Web3Provider } from '@ethersproject/providers';
+import Web3 from 'web3';
 import { InjectedConnector } from '@web3-react/injected-connector';
 
 const connector = new InjectedConnector({
@@ -10,7 +11,7 @@ const connector = new InjectedConnector({
 });
 
 function getLibrary(provider) {
-  const library = new Web3Provider(provider);
+  const library = new Web3(provider);
   library.pollingInterval = 12000;
   return library;
 }

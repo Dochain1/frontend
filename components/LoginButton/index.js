@@ -22,7 +22,7 @@ const LoginButton = () => {
   const connect = useCallback(() => {
     activate(connector);
     localStorage.setItem('previouslyConnected', 'true');
-  }, [activate]);
+  }, [active]);
 
   const disconnect = () => {
     deactivate();
@@ -43,7 +43,8 @@ const LoginButton = () => {
   //Do not disconnect when browser is refresh
   useEffect(() => {
     if (localStorage.getItem('previouslyConnected') === 'true') connect();
-  }, [connect]);
+    console.log(localStorage.getItem('previouslyConnected'));
+  }, []);
 
   const truncatedAddress = useTruncatedAddress(account);
 
