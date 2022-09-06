@@ -12,9 +12,9 @@ const Layout = ({ children }) => {
     <Box h='100vh' w='100%'>
       <Box
         mx="auto"
-        maxW={"7xl"}
+        maxW={'full'}
         width="100%"
-  bg={useColorModeValue('gray.50', 'gray.900')}
+        bg={useColorModeValue('gray.50', 'gray.900')}
         px={4}
       >
         <Navbar />
