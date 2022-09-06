@@ -18,7 +18,7 @@ const ColorModeSwitch = () => {
         <SunIcon/>
         <Switch 
             onChange={toggleColorMode}
-            isChecked={colorModeDarkIsChecked}
+            isChecked={colorModeDarkIsChecked()}
         />        
         <MoonIcon/>
       </>
