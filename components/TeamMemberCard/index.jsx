@@ -19,7 +19,7 @@ import { MdPlace } from 'react-icons/md';
 
 const TeamMemberCard = ({member}) => {
   const { name, role, place, photo, gitHubUserName, linkedInUserName, twitterUserName } = member;
-  let boxBg = useColorModeValue("white !important","#111c44 !important");
+  let boxBg = useColorModeValue('gray.50', 'gray.900');
   let mainText = useColorModeValue("gray.800", "white");
   let secondaryText = useColorModeValue("gray.400", "gray.400");
   const { colorMode } = useColorMode();
@@ -36,7 +36,8 @@ const TeamMemberCard = ({member}) => {
       w={{ base: "500px", md: "580px" }}
       alignItems='center'
       direction='column'
-      boxShadow='dark-lg'>
+      boxShadow='dark-lg'
+      bg={boxBg}>
       <Flex flexDirection='column' mb='20px'>
         <Image
           borderRadius='full'
