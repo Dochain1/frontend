@@ -1,5 +1,5 @@
 import { UnsupportedChainIdError, useWeb3React } from '@web3-react/core';
-import { useEffect, useCallback } from 'react';
+import { useEffect, useCallback, useState } from 'react';
 import useTruncatedAddress from '../../hooks/useTruncatedAddress';
 import { connector } from '../../config/web3';
 import {
@@ -11,10 +11,12 @@ import {
   TagCloseButton,
 } from "@chakra-ui/react";
 import { AddIcon } from "@chakra-ui/icons";
+import { ethers } from "ethers";
 
 
 const LoginButton = () => {
-  const { account, activate, active, balance, deactivate, error } = useWeb3React();
+  const [balance, setBalance] = useState(0);
+  const { account, activate, active, deactivate, error, library } = useWeb3React();
   const isUnsupportedChain = error instanceof UnsupportedChainIdError;
 
   const connect = useCallback(() => {
@@ -26,6 +28,17 @@ const LoginButton = () => {
     deactivate();
     localStorage.removeItem('previouslyConnected');
   };
+
+  const getBalance = useCallback(async () => {
+    let toSet = 0;
+    const provider = new ethers.providers.Web3Provider(window.ethereum, "any");
+    toSet = await provider.getBalance(account)
+    setBalance((toSet / 1e18).toFixed(2));
+  }, [library?.ethers, account]);
+
+  useEffect(() => {
+    if (active) getBalance();
+  }, [active, getBalance]);
 
   //Do not disconnect when browser is refresh
   useEffect(() => {
