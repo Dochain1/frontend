@@ -16,8 +16,9 @@ import {
   useColorModeValue
 } from "@chakra-ui/react";
 import { HamburgerIcon, CloseIcon } from "@chakra-ui/icons";
+import { useWeb3React } from "@web3-react/core";
 
-const Links = [
+const LinksForConected = [
   {
     name: "Inicio",
     to: "/",
@@ -28,8 +29,16 @@ const Links = [
   },
 ];
 
-const renderLinks = () => {
-  return Links.map(({ name, to }) => (
+const LinksForNotConected = [
+  {
+    name: "Inicio",
+    to: "/",
+  },
+];
+
+const renderLinks = (active) => {
+  let renderLinksResult = active === true ? LinksForConected : LinksForNotConected; 
+  return renderLinksResult.map(({ name, to }) => (
     <Link href={to} passHref key={name}>
       <DefaultLink
         px={2}
@@ -47,8 +56,10 @@ const renderLinks = () => {
   ))
 };
 
+
 const Navbar = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
+  const { active, account, library } = useWeb3React();
 
   return (
     <>
@@ -86,7 +97,7 @@ const Navbar = () => {
               spacing={4}
               display={{ base: "none", md: "flex" }}
             >
-              {renderLinks()}
+              {renderLinks(active)}
             </HStack>
           </HStack>
           <HStack
@@ -104,7 +115,7 @@ const Navbar = () => {
         {isOpen ? (
           <Box pb={4} display={{ md: "none" }}>
             <Stack as={"nav"} spacing={4}>
-              {renderLinks()}
+              {renderLinks(active)}
             </Stack>
           </Box>
         ) : null}

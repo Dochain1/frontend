@@ -1,8 +1,7 @@
 import { UnsupportedChainIdError, useWeb3React } from '@web3-react/core';
-import { useEffect } from 'react';
+import { useEffect, useCallback } from 'react';
 import useTruncatedAddress from '../../hooks/useTruncatedAddress';
 import { connector } from '../../config/web3';
-import { useCallback } from 'react';
 import {
   Badge,
   Flex,
