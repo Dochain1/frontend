@@ -13,7 +13,7 @@ import {
   Textarea,
   useDisclosure 
 } from '@chakra-ui/react';
-import { CloseIcon } from '@chakra-ui/icons';
+import { CloseIcon, AddIcon } from '@chakra-ui/icons';
 import { FaSave } from 'react-icons/fa';
 
 
@@ -59,7 +59,14 @@ const ComplaintDialog = () => {
     }
 
     return <>
-      <Button onClick={onOpen}>Nueva Denuncia</Button>
+      <Button
+        variant={"solid"}
+        colorScheme={"green"}
+        size={"sm"}
+        leftIcon={<AddIcon />}
+        onClick={onOpen}
+      >Nueva Denuncia
+      </Button>
 
       <Modal onClose={onClose} isOpen={isOpen}>
         <ModalOverlay />

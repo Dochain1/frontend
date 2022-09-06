@@ -11,7 +11,6 @@ import {
   FormLabel,
   Select,
   Input,
-  Textarea,
   useDisclosure 
 } from '@chakra-ui/react';
 import { CloseIcon, AddIcon } from '@chakra-ui/icons';
