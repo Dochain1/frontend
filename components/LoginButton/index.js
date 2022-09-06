@@ -1,5 +1,5 @@
 import { UnsupportedChainIdError, useWeb3React } from '@web3-react/core';
-import React,{ useEffect, useCallback, useState } from 'react';
+import React, { useEffect, useCallback, useState } from 'react';
 import useTruncatedAddress from '../../hooks/useTruncatedAddress';
 import { connector } from '../../config/web3';
 import {
@@ -9,14 +9,14 @@ import {
   Tag,
   TagLabel,
   TagCloseButton,
-} from "@chakra-ui/react";
-import { AddIcon } from "@chakra-ui/icons";
-import { ethers } from "ethers";
-
+} from '@chakra-ui/react';
+import { AddIcon } from '@chakra-ui/icons';
+import { ethers } from 'ethers';
 
 const LoginButton = () => {
   const [balance, setBalance] = useState(0);
-  const { account, activate, active, deactivate, error, library } = useWeb3React();
+  const { account, activate, active, deactivate, error, library } =
+    useWeb3React();
   const isUnsupportedChain = error instanceof UnsupportedChainIdError;
 
   const connect = useCallback(() => {
@@ -31,8 +31,8 @@ const LoginButton = () => {
 
   const getBalance = useCallback(async () => {
     let toSet = 0;
-    const provider = new ethers.providers.Web3Provider(window.ethereum, "any");
-    toSet = await provider.getBalance(account)
+    const provider = new ethers.providers.Web3Provider(window.ethereum, 'any');
+    toSet = await provider.getBalance(account);
     setBalance((toSet / 1e18).toFixed(2));
   }, [library?.ethers, account]);
 
@@ -49,15 +49,14 @@ const LoginButton = () => {
   const truncatedAddress = useTruncatedAddress(account);
 
   return (
-    <Flex alignItems={"center"}>
+    <Flex alignItems={'center'}>
       {active ? (
         <Tag colorScheme="green" borderRadius="full">
-          <TagLabel>{truncatedAddress}
-          </TagLabel>
+          <TagLabel>{truncatedAddress}</TagLabel>
           <Badge
             d={{
-              base: "none",
-              md: "block",
+              base: 'none',
+              md: 'block',
             }}
             variant="solid"
             fontSize="0.8rem"
@@ -69,14 +68,14 @@ const LoginButton = () => {
         </Tag>
       ) : (
         <Button
-          variant={"solid"}
-          colorScheme={"green"}
-          size={"sm"}
+          variant={'solid'}
+          colorScheme={'green'}
+          size={'sm'}
           leftIcon={<AddIcon />}
           onClick={connect}
           disabled={isUnsupportedChain}
         >
-          {isUnsupportedChain ? "Red no soportada" : "Conectar wallet"}
+          {isUnsupportedChain ? 'Red no soportada' : 'Conectar wallet'}
         </Button>
       )}
     </Flex>
