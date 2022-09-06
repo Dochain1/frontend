@@ -56,11 +56,10 @@ const Navbar = () => {
         mx="auto"
         maxW={"7xl"}
         width="100%"
-        bg={useColorModeValue("white", "gray.800")}
-        px={4}
+  bg={useColorModeValue('gray.50', 'gray.900')}
       >
         <Flex
-          bg={useColorModeValue("white", "gray.800")}
+    bg={useColorModeValue('gray.50', 'gray.900')}
           color={useColorModeValue("gray.600", "white")}
           minH={"60px"}
           py={{ base: 2 }}

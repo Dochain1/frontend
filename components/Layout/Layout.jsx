@@ -14,7 +14,7 @@ const Layout = ({ children }) => {
         mx="auto"
         maxW={"7xl"}
         width="100%"
-        bg={useColorModeValue("white", "gray.800")}
+  bg={useColorModeValue('gray.50', 'gray.900')}
         px={4}
       >
         <Navbar />
@@ -31,7 +31,7 @@ const Layout = ({ children }) => {
           {children}
       </Flex>     
 
-      {/* <Footer /> */}
+      <Footer />
     </Box>
   );
 };
