@@ -1,78 +1,192 @@
 import React from 'react';
-import { MdPlace } from 'react-icons/md';
-import { BsUnlockFill, BsBriefcaseFill } from 'react-icons/bs';
+import { MdPlace, MdRemoveRedEye } from 'react-icons/md';
+import { BsUnlockFill } from 'react-icons/bs';
 import { FaUserAlt, FaUserTie } from "react-icons/fa";
 import Link from 'next/link';
+import {
+  Box,
+  Flex,
+  Button,
+  Icon,
+  Text,
+  Spacer,
+  useColorModeValue,
+} from "@chakra-ui/react";
+
 
 // eslint-disable-next-line no-unused-vars
 const CaseCard = ({ item }) => {
-  return<>  
-  <div className="shadow-2xl max-w-sm w-full lg:max-w-full lg:flex rounded-2xl border-r border-b border-l border-t border-gray-400 lg:border-l lg:border-t lg:border-gray-400 bg-white  p-4 flex flex-col justify-between leading-normal">
-    
-    <div className="text-center pb-2 inline-block bg-blue-200 rounded-full px-3 py-1 ">
-      <span className="text-xl font-semibold text-gray-900 mr-2 mb-2">CBBA5001</span>
-    </div>
-    
-    <div className="flex items-center mt-4">
-      <BsBriefcaseFill  className="text-blue-600 mr-2 mb-2"/>
-      <div className="text-gray-900 font-bold text-xl mb-2 leading-none">PORTAFOLIO</div>
-    </div>
-    
-    <div className="flex items-start mt-4">
-      <BsUnlockFill  className="fill-current text-blue-500 w-3 h-3 mr-2"/>
-      <div className="text-sm">
-        <p className="text-gray-900 leading-none font-semibold">Estado</p>
-        <p className="text-gray-700">Abierto</p>
-      </div>
-    </div>
+  let secondaryBg = useColorModeValue("gray.50", "whiteAlpha.100");
+  let mainText = useColorModeValue("gray.800", "white");
 
-    <div className="flex items-start mt-4">
-      <FaUserAlt  className="fill-current text-blue-500 w-3 h-3 mr-2"/>
-      <div className="text-sm">
-        <p className="text-gray-900 leading-none font-semibold">Demandante</p>
-        <p className="text-gray-700">Nombre</p>
-      </div>
-    </div>
+  return <Flex display={'inline-flex'} p={2} pb={4} alignItems="center" justifyContent="center">
+    <Box
+      borderRadius='20px'
+      h='auto'
+      w={{ base: "315px", md: "345px" }}
+      direction='column'
+      boxShadow='dark-lg'>
 
-    <div className="flex items-start mt-4">
-      <FaUserTie  className="fill-current text-blue-500 w-3 h-3 mr-2"/>
-      <div className="text-sm">
-        <p className="text-gray-900 leading-none font-semibold">Abogado Demandante</p>
-        <p className="text-gray-700">Nombre</p>
-      </div>
-    </div>
+      <Box p='20px'>
+        <Box w='100%'>
+          <Text
+            textTransform="uppercase"
+            textAlign="center"
+            bg={useColorModeValue("#171923", "whiteAlpha.100")}
+            px={5}
+            color={useColorModeValue('gray.50', 'gray.300')}
+            fontSize="xl"
+            fontWeight="600"
+            rounded="2xl"
+            w='100%'>
+            CBBA5001
+          </Text> 
+        </Box>
+        <Box mb='auto'>
+          <Text textAlign="center" color={mainText} w='100%' fontSize='l' pt='10px'>
+            PORTAFOLIO
+          </Text>
+        </Box>
+      </Box>
 
-    <div className="flex items-start mt-4">
-      <FaUserAlt  className="fill-current text-blue-500 w-3 h-3 mr-2"/>
-      <div className="text-sm">
-        <p className="text-gray-900 leading-none font-semibold">Demandado</p>
-        <p className="text-gray-700">Nombre</p>
-      </div>
-    </div>
+      <Flex
+        bg={secondaryBg}
+        w='100%'
+        p='20px'
+        height='auto'
+        direction='column'>
+          <Flex>
+            <Icon 
+              as={BsUnlockFill} 
+              w='20px' 
+              h='20px'
+              me='6px'
+              mt='6px'
+              color={mainText} 
+            />
+            <Box mb='auto'>
+              <Text color='green.400' fontSize='sm' my='auto' fontWeight='500'>
+                Abierto
+              </Text>
+              <Text color='gray.500' fontSize='sm' my='auto' fontWeight='500' lineHeight='24px' mt='-5px'>
+                Estado
+              </Text>
+            </Box>
+          </Flex>
 
-    <div className="flex items-start mt-4">
-      <FaUserTie  className="fill-current text-blue-500 w-3 h-3 mr-2"/>
-      <div className="text-sm">
-        <p className="text-gray-900 leading-none font-semibold">Abogado Demandado</p>
-        <p className="text-gray-700">Nombre</p>
-      </div>
-    </div>
+          <Flex mt='10px'>
+            <Icon
+              as={FaUserAlt}
+              w='20px'
+              h='20px'
+              me='6px'
+              mt='6px'
+              color={mainText}
+            />
+            <Box mb='auto'>
+              <Text color={mainText} fontSize='sm' my='auto' fontWeight='500'>
+                Nombre
+              </Text>
+              <Text color='gray.500' fontSize='sm' my='auto' fontWeight='500' lineHeight='24px' >
+                Demandante
+              </Text>
+            </Box>
+          </Flex>
 
-    <div className="flex items-start mt-4">
-      <MdPlace  className="fill-current text-blue-500 w-3 h-3 mr-2"/>
-      <div className="text-sm">
-        <p className="text-gray-900 leading-none font-semibold">Lugar del caso</p>
-        <p className="text-gray-600">Cochabamba, Bolivia</p>
-      </div>
-    </div>
-    
-    <div className="flex flex-row-reverse p-6 space-x-2 rounded-b border-t border-gray-200">
-      <Link href={'/cases/' + item}>
-        <button type="button" className="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-blue-600 text-base font-medium text-white hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 sm:ml-3 sm:w-auto sm:text-sm">Ver</button>
-      </Link>
-    </div>
-  </div>
-  </>
+          <Flex mt='10px'>
+            <Icon
+              as={FaUserTie}
+              w='20px'
+              h='20px'
+              me='6px'
+              mt='6px'
+              color={mainText}
+            />
+            <Box mb='auto'>
+              <Text color={mainText} fontSize='sm' my='auto' fontWeight='500'>
+                Nombre            
+              </Text>
+              <Text color='gray.500' fontSize='sm' my='auto' fontWeight='500' lineHeight='24px' mt='-5px'>
+                Abogado Demandante
+              </Text>
+            </Box>
+          </Flex>
+
+          <Flex mt='10px'>
+            <Icon
+              as={FaUserAlt}
+              w='20px'
+              h='20px'
+              me='6px'
+              mt='6px'
+              color={mainText}
+            />
+            <Box mb='auto'>
+              <Text color={mainText} fontSize='sm' my='auto' fontWeight='500'>
+                Nombre
+              </Text>
+              <Text color='gray.500' fontSize='sm' my='auto' fontWeight='500' lineHeight='24px' >
+                Demandado
+              </Text>
+            </Box>
+          </Flex>
+
+          <Flex mt='10px'>
+            <Icon
+              as={FaUserTie}
+              w='20px'
+              h='20px'
+              me='6px'
+              mt='6px'
+              color={mainText}
+            />
+            <Box mb='auto'>
+              <Text color={mainText} fontSize='sm' my='auto' fontWeight='500'>
+                Nombre
+              </Text>
+              <Text color='gray.500' fontSize='sm' my='auto' fontWeight='500' lineHeight='24px' >
+                Abogado Demandado
+              </Text>
+            </Box>
+          </Flex>
+
+          <Flex mt='10px'>
+            <Icon
+              as={MdPlace}
+              w='20px'
+              h='20px'
+              me='6px'
+              mt='6px'
+              color={mainText}
+            />
+            <Box mb='auto'>
+              <Text color={mainText} fontSize='sm' my='auto' fontWeight='500'>
+                Cochabamba, Bolivia
+              </Text>
+              <Text color='gray.500' fontSize='sm' my='auto' fontWeight='500' lineHeight='24px' >
+                Lugar del caso
+              </Text>
+            </Box>
+          </Flex>
+
+      </Flex>
+
+      <Box p='20px'>
+        <Flex w='100%' mb='10px'>
+          <Spacer/>
+          <Link href={'/cases/' + item}>
+            <Button
+              variant={"solid"}
+              colorScheme={"green"}
+              size={"sm"}
+              leftIcon={<MdRemoveRedEye />}
+            >Abrir
+            </Button>
+          </Link>
+        </Flex>
+      </Box>  
+    </Box>
+  </Flex>
 };
 
 export default CaseCard;
