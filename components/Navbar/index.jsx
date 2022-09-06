@@ -27,13 +27,21 @@ const LinksForConected = [
     name: "Casos",
     to: "/cases",
   },
+  {
+    name: "Team",
+    to: "/team",
+  }
 ];
 
 const LinksForNotConected = [
   {
     name: "Inicio",
     to: "/",
-  },
+  },,
+  {
+    name: "Team",
+    to: "/team",
+  }
 ];
 
 const renderLinks = (active) => {
