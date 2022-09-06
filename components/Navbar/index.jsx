@@ -59,6 +59,7 @@ const renderLinks = (active) => {
 
 const Navbar = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
+  // eslint-disable-next-line no-unused-vars
   const { active, account, library } = useWeb3React();
 
   return (

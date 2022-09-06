@@ -16,6 +16,7 @@ import {
 import { CloseIcon, AddIcon } from '@chakra-ui/icons';
 import { FaSave } from 'react-icons/fa';
 import { useWeb3React } from '@web3-react/core';
+// eslint-disable-next-line no-unused-vars
 import { decryptData, decryptPGP, getPublicKey } from '../../utils/encrypt';
 
 const UploadDocumentDialog = ({ caseId }) => {

@@ -4,8 +4,10 @@ import UploadDocumentDialog from '../../components/UploadDocumentDialog';
 import {
   Box,
   Button,
+  // eslint-disable-next-line no-unused-vars
   Flex,
   Heading,
+  // eslint-disable-next-line no-unused-vars
   Spacer,
   Tag,
   Table,
@@ -28,7 +30,7 @@ const Case = () => {
     [2,{ color: "green", typeDocument: "Memorial"}],
     [3,{ color: "yellow", typeDocument: "Prueba"}],
     [4,{ color: "red", typeDocument: "Requerimiento"}],
-    [5,{ color: "blue", typeDocument: "Resolucion"}],
+    [5,{ color: "blue", typeDocument: "Resolución"}],
   ]);
 
   const {

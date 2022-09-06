@@ -1,5 +1,5 @@
 import { UnsupportedChainIdError, useWeb3React } from '@web3-react/core';
-import { useEffect, useCallback, useState } from 'react';
+import React,{ useEffect, useCallback, useState } from 'react';
 import useTruncatedAddress from '../../hooks/useTruncatedAddress';
 import { connector } from '../../config/web3';
 import {
