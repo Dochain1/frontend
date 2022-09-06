@@ -1,5 +1,4 @@
 import { encrypt } from '@metamask/eth-sig-util';
-import { useWeb3React } from '@web3-react/core';
 import {
   bufferToHex,
   fromRpcSig,

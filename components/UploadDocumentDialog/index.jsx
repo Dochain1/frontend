@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import { 
+import React, { useState, useEffect, useContext } from 'react';
+import {
   Button,
   Modal,
   ModalContent,
@@ -11,19 +11,21 @@ import {
   FormLabel,
   Select,
   Input,
-  useDisclosure 
+  useDisclosure,
 } from '@chakra-ui/react';
 import { CloseIcon, AddIcon } from '@chakra-ui/icons';
 import { FaSave } from 'react-icons/fa';
 import { useWeb3React } from '@web3-react/core';
 // eslint-disable-next-line no-unused-vars
 import { decryptData, decryptPGP, getPublicKey } from '../../utils/encrypt';
+import { GlobalContext } from '../../contexts/GlobalContext';
 
 const UploadDocumentDialog = ({ caseId }) => {
-    const { isOpen, onOpen, onClose } = useDisclosure();
-    const { active, account } = useWeb3React();
-    
-    const [uploadDocument, setUploadDocument] = useState({
+  const { isOpen, onOpen, onClose } = useDisclosure();
+  const { active, account } = useWeb3React();
+  const { storeData } = useContext(GlobalContext);
+
+  const [uploadDocument, setUploadDocument] = useState({
     documentName: '',
     documentType: '',
     documentFile: '',
@@ -75,10 +77,9 @@ const UploadDocumentDialog = ({ caseId }) => {
         body: formData,
       }
     );
-    console.log(response);
     const res = await response.json();
-    console.log(res);
-    console.log(res.data.cid);
+    const payload = { cid: res.data.cid, privateKeys: res.data.privateKey };
+    storeData(payload);
     closeDialog();
   };
 
@@ -100,77 +101,90 @@ const UploadDocumentDialog = ({ caseId }) => {
     }
   }, []);
 
-  return <>
-    <Button
-      variant={"solid"}
-      colorScheme={"green"}
-      size={"sm"}
-      leftIcon={<AddIcon />}
-      onClick={onOpen}
-    >Agregar Documento
-    </Button>
+  return (
+    <>
+      <Button
+        variant={'solid'}
+        colorScheme={'green'}
+        size={'sm'}
+        leftIcon={<AddIcon />}
+        onClick={onOpen}
+      >
+        Agregar Documento
+      </Button>
 
-    <Modal onClose={onClose} isOpen={isOpen}>
-      <ModalOverlay />
-      <ModalContent>
-        <ModalHeader>Agregar Documento</ModalHeader>
-        
-        <ModalBody>
-          <FormControl id="documentName" isRequired mb='10px'>
-            <FormLabel>Nombre del documento</FormLabel>
-            <Input
-              placeholder="Nombre del documento"
-              _placeholder={{ color: 'gray.500' }}
-              type="text"
-              name="documentName"
-              value={uploadDocument.documentName}
-              onChange={onChangeHandler}
-            />
-          </FormControl>
+      <Modal onClose={onClose} isOpen={isOpen}>
+        <ModalOverlay />
+        <ModalContent>
+          <ModalHeader>Agregar Documento</ModalHeader>
 
-          <FormControl id="documentType" isRequired mb='10px'>
-            <FormLabel>Tipo de documento</FormLabel>
-            <Select placeholder='Tipo de documento' value={uploadDocument.documentType} onChange={onChangeHandler}>
-              {documentTypes.map((documentType, index) => {
-                return <option value={`${documentType}`} key={index}>{documentType}</option>
-              })}
-            </Select>
-          </FormControl> 
+          <ModalBody>
+            <FormControl id="documentName" isRequired mb="10px">
+              <FormLabel>Nombre del documento</FormLabel>
+              <Input
+                placeholder="Nombre del documento"
+                _placeholder={{ color: 'gray.500' }}
+                type="text"
+                name="documentName"
+                value={uploadDocument.documentName}
+                onChange={onChangeHandler}
+              />
+            </FormControl>
 
-          <FormControl id="documentFile" isRequired mb='10px'>
-            <FormLabel>Documento</FormLabel>
-            <Input
-              placeholder="Lugar del caso"
-              _placeholder={{ color: 'gray.500' }}
-              type="file"
-              name="casePlace"
-              onChange={onChangeFileInput}
-            />
-          </FormControl>    
-        </ModalBody>
+            <FormControl id="documentType" isRequired mb="10px">
+              <FormLabel>Tipo de documento</FormLabel>
+              <Select
+                placeholder="Tipo de documento"
+                value={uploadDocument.documentType}
+                onChange={onChangeHandler}
+              >
+                {documentTypes.map((documentType, index) => {
+                  return (
+                    <option value={`${documentType}`} key={index}>
+                      {documentType}
+                    </option>
+                  );
+                })}
+              </Select>
+            </FormControl>
 
-        <ModalFooter>
-          <Button
-            variant={"solid"}
-            colorScheme={"red"}
-            size={"sm"}
-            leftIcon={<CloseIcon />}
-            onClick={() => closeDialog()}
-            mr={3}
-          >Cancelar
-          </Button>
-          <Button
-            variant={"solid"}
-            colorScheme={"green"}
-            size={"sm"}
-            leftIcon={<FaSave />}
-            onClick={() => saveUploadDocument()}
-          >Guardar
-          </Button>
-        </ModalFooter>
-      </ModalContent>
-    </Modal>
-  </>;
+            <FormControl id="documentFile" isRequired mb="10px">
+              <FormLabel>Documento</FormLabel>
+              <Input
+                placeholder="Lugar del caso"
+                _placeholder={{ color: 'gray.500' }}
+                type="file"
+                name="casePlace"
+                onChange={onChangeFileInput}
+              />
+            </FormControl>
+          </ModalBody>
+
+          <ModalFooter>
+            <Button
+              variant={'solid'}
+              colorScheme={'red'}
+              size={'sm'}
+              leftIcon={<CloseIcon />}
+              onClick={() => closeDialog()}
+              mr={3}
+            >
+              Cancelar
+            </Button>
+            <Button
+              variant={'solid'}
+              colorScheme={'green'}
+              size={'sm'}
+              leftIcon={<FaSave />}
+              onClick={() => saveUploadDocument()}
+            >
+              Guardar
+            </Button>
+          </ModalFooter>
+        </ModalContent>
+      </Modal>
+    </>
+  );
 };
 
 export default UploadDocumentDialog;
