@@ -78,7 +78,6 @@ const Navbar = () => {
             display={{ md: "none" }}
             onClick={isOpen ? onClose : onOpen}
           />
-
           <HStack spacing={8} alignItems={"center"}>
             <Flex alignItems="center">
               <Image src="./images/logo.png" width="80px" />
@@ -91,19 +90,16 @@ const Navbar = () => {
               {renderLinks()}
             </HStack>
           </HStack>
-
           <HStack
             as={"nav"}
             spacing={4}
-            display={{ base: "none", md: "flex" }}
           >
             <ColorModeSwitch/>
             <Center height='50px'>
-  <Divider orientation='vertical' />
-</Center>
+              <Divider orientation='vertical' />
+            </Center>
             <LoginButton/>
           </HStack>
-
         </Flex>
 
         {isOpen ? (

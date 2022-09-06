@@ -4,6 +4,7 @@ import useTruncatedAddress from '../../hooks/useTruncatedAddress';
 import { connector } from '../../config/web3';
 import { useCallback } from 'react';
 import {
+  Badge,
   Flex,
   Button,
   Tag,
@@ -14,7 +15,7 @@ import { AddIcon } from "@chakra-ui/icons";
 
 
 const LoginButton = () => {
-  const { account, activate, active, deactivate, error } = useWeb3React();
+  const { account, activate, active, balance, deactivate, error } = useWeb3React();
   const isUnsupportedChain = error instanceof UnsupportedChainIdError;
 
   const connect = useCallback(() => {
@@ -38,9 +39,19 @@ const LoginButton = () => {
     <Flex alignItems={"center"}>
       {active ? (
         <Tag colorScheme="green" borderRadius="full">
-          <TagLabel>
-            {truncatedAddress}
+          <TagLabel>{truncatedAddress}
           </TagLabel>
+          <Badge
+            d={{
+              base: "none",
+              md: "block",
+            }}
+            variant="solid"
+            fontSize="0.8rem"
+            ml={1}
+          >
+            ~{balance} Ξ
+          </Badge>
           <TagCloseButton onClick={disconnect} />
         </Tag>
       ) : (
