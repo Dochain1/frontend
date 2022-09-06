@@ -1,29 +1,28 @@
 import React, { useState } from 'react';
 import CaseCard from '../../components/CaseCard';
 import {
+  Box,
   Flex,
   Heading
 } from "@chakra-ui/react";
 
 const Cases = () => {
   // eslint-disable-next-line no-unused-vars
-  const [cases, setCases] = useState(Array(3).fill());
+  const [cases, setCases] = useState(Array(6).fill());
   
   return (
     <>
       <Heading as="h1" fontSize="4xl" textAlign='center' p='0px'>
         Casos
       </Heading>
-      <Flex
-        direction={{ base: "column", xl: "row" }}
-        mx='auto'
-        p="20px"
-        rowGap='20px'
-        columnGap='40px'>
-        {cases.map((_, index) => {
-          return <CaseCard item={index} key={index} />
-        })}
-      </Flex>
+
+      <Box minH={'100vh'} >
+        <Flex maxW={'100%'} wrap={'wrap'} alignItems='center'justifyContent={'center'} mb={4} gap='2'>
+          {cases.map((_, index) => {
+            return <CaseCard item={index} key={index} />
+          })}
+        </Flex> 
+      </Box>
     </>
   );
 };
