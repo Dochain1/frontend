@@ -10,14 +10,19 @@ const Team = () => {
   const team = [
     {
       name: "Alberto Silva",
-      role: "",
-      place: "",
+      role: "Computer systems student / Full stack developer",
+      place: "México, CDMX",
       photo: "https://avatars.githubusercontent.com/u/23264797?v=4",
-      gitHubUserName: "Alberto-SC"
+      gitHubUserName: "Alberto-SC",
+      linkedInUserName: {
+        name: "Alberto Silva",
+        url: "alberto-silva-358955175"
+      },
+      twitterUserName: "luisbeto9806"
     },
     {
       name: "Bárbaro Javier Valmaseda",
-      role: "",
+      role: "Computer Science Engineer / Full Stack Blockchain Developer",
       place: "Cuba",
       photo: "https://avatars.githubusercontent.com/u/41394649?v=4",
       gitHubUserName: "bjvalmaseda-dev",      
@@ -29,8 +34,8 @@ const Team = () => {
     },
     {
       name: "Ivy Saskia Sejas Rocabado",
-      role: "System Engineer Student",
-      place: "Bolivia",
+      role: "System Engineer Student / Full Stack Blockchain Developer",
+      place: "Cochabamba, Bolivia",
       photo: "https://media-exp1.licdn.com/dms/image/C5603AQEB-h0Ci5PYeg/profile-displayphoto-shrink_800_800/0/1536500960836?e=1668038400&v=beta&t=DzQLFJGLIELpAZoLa9JaI8wFUrnsKtZNHDMqiIJrVWQ",
       gitHubUserName: "IvySaskia",      
       linkedInUserName: {
@@ -41,8 +46,8 @@ const Team = () => {
     },
     {
       name: "José Piña",
-      role: "",
-      place: "Buenos Aires",
+      role: "Smart Contract Engineer",
+      place: "Venezuela",
       photo: "https://avatars.githubusercontent.com/u/32434364?v=4",
       gitHubUserName: "pinajmr",      
       linkedInUserName: {
@@ -53,7 +58,7 @@ const Team = () => {
     },
     {
       name: "Rodrigo Ramos",
-      role: "",
+      role: "Computer Systems Engineer student / Fullstack js dev / Blockchain dev",
       place: "CDMX",
       photo: "https://avatars.githubusercontent.com/u/57158796?v=4",
       gitHubUserName: "rdr-x",      
@@ -61,14 +66,18 @@ const Team = () => {
         name: "Rodrigo Ramos",
         url: "rodrx20"
       },
-      twitterUserName: "rdr-x"
+      twitterUserName: "rdrx"
     },
     {
       name: "Sergio Valadez",
-      role: "",
+      role: "Product Owner",
       place: "México",
       photo: "https://avatars.githubusercontent.com/u/67393791?v=4",
-      gitHubUserName: "sergiogval",      
+      gitHubUserName: "sergiogval",
+      linkedInUserName: {
+        name: "Sergio Valadez Rivera",
+        url: "sergio-valadez-rivera"
+      },      
       twitterUserName: "sgvldz"
     },
   ];

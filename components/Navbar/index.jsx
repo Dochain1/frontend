@@ -37,7 +37,7 @@ const LinksForNotConected = [
   {
     name: "Inicio",
     to: "/",
-  },,
+  },
   {
     name: "Team",
     to: "/team",

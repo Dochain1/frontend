@@ -1,6 +1,5 @@
 import React from 'react';
 import {
-  Box,
   Flex,
   IconButton,
   Image,
@@ -23,10 +22,6 @@ const TeamMemberCard = ({member}) => {
   let mainText = useColorModeValue("gray.800", "white");
   let secondaryText = useColorModeValue("gray.400", "gray.400");
   const { colorMode } = useColorMode();
-
-  const space = () => {
-    return (gitHubUserName && linkedInUserName && twitterUserName) || (gitHubUserName && linkedInUserName) || (linkedInUserName && twitterUserName) || (gitHubUserName && twitterUserName)
-  };
 
   return ( 
     <Flex
@@ -73,7 +68,7 @@ const TeamMemberCard = ({member}) => {
         </Flex>
       </Flex>
 
-      <Flex justify={space() ? 'space-between' : 'center'} w='100%' px='36px'>
+      <Flex justify='space-between' w='100%' px='36px'>
         {gitHubUserName ? <Link href={`https://github.com/${gitHubUserName}`} passHref>
           <Flex flexDirection='column' alignItems='center'>
             <IconButton
