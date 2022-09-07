@@ -1,12 +1,17 @@
 import React from 'react';
 import {
   chakra,
+  Button,
   Stack,
   Flex,
   Heading,
   Text,
   Image
 } from "@chakra-ui/react";
+import { 
+  AiFillGithub,
+} from "react-icons/ai";
+import Link from 'next/link';
 
 
 const Home = () => {
@@ -52,6 +57,21 @@ const Home = () => {
         <Text color={"blue.300"}>
           <chakra.span as='b'> DOCHAIN </chakra.span>es una dapp donde cada uno de los tipos de documentos legales se almacenan en un Blockchain y solo tengan acceso a cada portafolio las personas y/o entidades que solo deberian tener acceso (abogados, jueces y demás entidades involucrados en el caso).
         </Text>
+
+        <Link href={"https://github.com/Dochain1"} passHref>
+          <Button
+            rounded={"full"}
+            size={"lg"}
+            fontWeight={"normal"}
+            px={6}
+            bg={"green.400"}
+            leftIcon={<AiFillGithub/>}
+            variant='solid'
+            _hover={{ bg: "green.500" }}
+          >
+            Dochain
+          </Button>
+        </Link>
       </Stack>
       
       <Flex
