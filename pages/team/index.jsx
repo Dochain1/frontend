@@ -83,7 +83,7 @@ const Team = () => {
       </Heading>
 
       <Text fontSize="xl" textAlign='center' mt='15px' mb='50px'>
-        Conoce al equipo que esta integrado por participantes de <br/> <chakra.span color="green.500" as='b'> "ETHEREUM DEVELOPER PROGRAM" </chakra.span> de <chakra.span color="green.500" as='b'> Platzi </chakra.span>
+        Conoce al equipo que esta integrado por participantes de <br/> <chakra.span color="green.500" as='b'> ETHEREUM DEVELOPER PROGRAM </chakra.span> de <chakra.span color="green.500" as='b'> Platzi </chakra.span>
       </Text>
 
       <Box minH={'100vh'} >
