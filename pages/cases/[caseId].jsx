@@ -4,11 +4,7 @@ import UploadDocumentDialog from '../../components/UploadDocumentDialog';
 import {
   Box,
   Button,
-  // eslint-disable-next-line no-unused-vars
-  Flex,
   Heading,
-  // eslint-disable-next-line no-unused-vars
-  Spacer,
   Tag,
   Table,
   Thead,
@@ -17,6 +13,7 @@ import {
   Th,
   Td,
   TableContainer,
+  useColorModeValue
 } from '@chakra-ui/react';
 import { ArrowForwardIcon } from '@chakra-ui/icons';
 import { useWeb3React } from '@web3-react/core';
@@ -77,6 +74,8 @@ const Case = () => {
     query: { caseId },
   } = useRouter();
 
+  let bg = useColorModeValue('gray.50', 'gray.900');
+
   return (
     <>
       <Box>
@@ -89,8 +88,8 @@ const Case = () => {
         <UploadDocumentDialog caseId={caseId} alignItems="center" />
       </Box>
 
-      <TableContainer p="40px" mt="20px" borderRadius="10px" boxShadow="2xl">
-        <Table variant="striped" size="lg">
+      <TableContainer p="40px" mt="20px" borderRadius='10px' boxShadow='2xl' bg={bg}>
+        <Table variant="striped" size='lg'>
           <Thead>
             <Tr>
               <Th fontSize="xl">Documento</Th>

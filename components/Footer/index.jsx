@@ -36,7 +36,7 @@ const Footer = () => {
         <Divider orientation='vertical' borderColor={useColorModeValue('gray.200', 'gray.700')}/>
       </Center>
       <Image src="./images/platzi.svg" width="80px"/>
-      <Heading size="md" color="green.400" mt={0.2} ml={1}>
+      <Heading size="md" color="blue.200" mt={0.2} ml={1}>
         Project 
       </Heading>
     </Flex>
