@@ -14,10 +14,11 @@ import {
 } from "react-icons/ai";
 import Link from 'next/link';
 import { MdPlace } from 'react-icons/md';
+import { SiPlatzi } from 'react-icons/si';
 
 
 const TeamMemberCard = ({member}) => {
-  const { name, role, place, photo, gitHubUserName, linkedInUserName, twitterUserName } = member;
+  const { name, role, place, photo, gitHubUserName, linkedInUserName, platziUserName, twitterUserName } = member;
   let boxBg = useColorModeValue('gray.50', 'gray.900');
   let mainText = useColorModeValue("gray.800", "white");
   let secondaryText = useColorModeValue("gray.400", "gray.400");
@@ -68,51 +69,46 @@ const TeamMemberCard = ({member}) => {
         </Flex>
       </Flex>
 
-      <Flex justify='space-between' w='100%' px='36px'>
-        {gitHubUserName ? <Link href={`https://github.com/${gitHubUserName}`} passHref>
-          <Flex flexDirection='column' alignItems='center'>
-            <IconButton
-              variant={colorMode === 'dark' ? 'ghost' : 'solid'}
-              aria-label='Github'
-              fontSize='30px'
-              size='sm'
-              icon={<AiFillGithub />}
-            />
-            <Text color={secondaryText} fontWeight='500'>
-              @{gitHubUserName}
-            </Text>
-          </Flex>
-        </Link> : null }
+      <Flex justify='center' w='100%' px='36px'>
+        <Link href={`https://github.com/${gitHubUserName}`} passHref>
+          <IconButton
+            variant={colorMode === 'dark' ? 'ghost' : 'solid'}
+            aria-label='Github'
+            fontSize='30px'
+            size='sm'
+            icon={<AiFillGithub />}
+          />
+        </Link>
 
-        {linkedInUserName ? <Link href={`https://www.linkedin.com/in/${linkedInUserName.url}`} passHref>
-          <Flex flexDirection='column' alignItems='center'>
-            <IconButton
-              variant={colorMode === 'dark' ? 'ghost' : 'solid'}
-              aria-label='LinkedIn'
-              fontSize='30px'
-              size='sm'
-              icon={<AiFillLinkedin />}
-            />
-            <Text color={secondaryText} fontWeight='500'>
-              @{linkedInUserName.name}
-            </Text>
-          </Flex>
-        </Link> : null }
+        <Link href={`https://www.linkedin.com/in/${linkedInUserName}`} passHref>
+          <IconButton
+            variant={colorMode === 'dark' ? 'ghost' : 'solid'}
+            aria-label='LinkedIn'
+            fontSize='30px'
+            size='sm'
+            icon={<AiFillLinkedin />}
+          />
+        </Link>
 
-        {twitterUserName ? <Link href={`https://twitter.com/${twitterUserName}`} passHref>
-          <Flex flexDirection='column' alignItems='center'>
-            <IconButton
-              variant={colorMode === 'dark' ? 'ghost' : 'solid'}
-              aria-label='LinkedIn'
-              fontSize='30px'
-              size='sm'
-              icon={<AiFillTwitterSquare />}
-            />
-            <Text color={secondaryText} fontWeight='500'>
-              @{twitterUserName}
-            </Text>
-          </Flex>
-        </Link> : null }
+        <Link href={`https://twitter.com/${twitterUserName}`} passHref>
+          <IconButton
+            variant={colorMode === 'dark' ? 'ghost' : 'solid'}
+            aria-label='LinkedIn'
+            fontSize='30px'
+            size='sm'
+            icon={<AiFillTwitterSquare />}
+          />
+        </Link>
+
+        <Link href={`https://platzi.com/p/${platziUserName}`} passHref>
+          <IconButton
+            variant={colorMode === 'dark' ? 'ghost' : 'solid'}
+            aria-label='LinkedIn'
+            fontSize='25px'
+            size='sm'
+            icon={<SiPlatzi />}
+          />
+        </Link>
       </Flex>
     </Flex>
   );

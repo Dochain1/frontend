@@ -20,6 +20,8 @@ const ColorModeSwitch = () => {
         <Switch 
             onChange={toggleColorMode}
             isChecked={colorModeDarkIsChecked()}
+            colorScheme={"green"}
+            sx={{ 'span.chakra-switch__track:not([data-checked])': { backgroundColor: 'yellow.300' } }}
         />        
         <MoonIcon/>
       </>
