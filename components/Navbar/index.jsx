@@ -4,6 +4,7 @@ import LoginButton from '../LoginButton';
 import ColorModeSwitch from '../ColorModeSwitch';
 import {
   Box,
+  Button,
   Center,
   Divider,
   Flex,
@@ -12,24 +13,31 @@ import {
   useDisclosure,
   Stack,
   Image,
-  Link as DefaultLink, 
   useColorModeValue
 } from "@chakra-ui/react";
 import { HamburgerIcon, CloseIcon } from "@chakra-ui/icons";
 import { useWeb3React } from "@web3-react/core";
+import { GiInjustice } from 'react-icons/gi';
+import { RiTeamFill } from 'react-icons/ri';
+import { FaHome } from 'react-icons/fa';
+
+
 
 const LinksForConected = [
   {
     name: "Inicio",
     to: "/",
+    icon: <FaHome/>
   },
   {
     name: "Casos",
     to: "/cases",
+    icon: <GiInjustice/>
   },
   {
     name: "Team",
     to: "/team",
+    icon: <RiTeamFill/>
   }
 ];
 
@@ -37,29 +45,31 @@ const LinksForNotConected = [
   {
     name: "Inicio",
     to: "/",
+    icon: <FaHome/>
   },
   {
     name: "Team",
     to: "/team",
+    icon: <RiTeamFill/>
   }
 ];
 
 const renderLinks = (active) => {
   let renderLinksResult = active === true ? LinksForConected : LinksForNotConected; 
-  return renderLinksResult.map(({ name, to }) => (
+  return renderLinksResult.map(({ name, to, icon }) => (
     <Link href={to} passHref key={name}>
-      <DefaultLink
-        px={2}
-        py={1}
-        as={Link}
+      <Button
+        variant={"ghost"}
+        size={"sm"}
+        leftIcon={icon}
         rounded={"md"}
         _hover={{
           textDecoration: "none",
           bg: useColorModeValue("gray.200", "gray.700"),
-        }}
+        }} 
       >
         {name}
-      </DefaultLink>
+      </Button>
     </Link>
   ))
 };
