@@ -4,8 +4,6 @@ import { InjectedConnector } from '@web3-react/injected-connector';
 
 const connector = new InjectedConnector({
   supportedChainIds: [
-    3, //Ropsten
-    4, //Rinkeby
     5, //goerli
   ],
 });
