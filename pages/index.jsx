@@ -1,24 +1,26 @@
 import React from 'react';
 import {
+  chakra,
   Stack,
   Flex,
   Heading,
   Text,
-  Button,
-  Image,
-  Badge,
-  useToast,
+  Image
 } from "@chakra-ui/react";
+
 
 const Home = () => {
   return <>
-      <Stack
+    <Stack
       align={"center"}
       spacing={{ base: 8, md: 10 }}
-      py={{ base: 20, md: 28 }}
-      direction={{ base: "column-reverse", md: "row" }}
+      py='7px'
+      direction={{ base: "column", md: "row" }}
     >
-      <Stack flex={1} spacing={{ base: 5, md: 10 }}>
+      <Stack 
+        flex={1} 
+        spacing={{ base: 5, md: 10 }}
+      >
         <Heading
           lineHeight={1.1}
           fontWeight={600}
@@ -34,49 +36,24 @@ const Home = () => {
               position: "absolute",
               bottom: 1,
               left: 0,
-              bg: "green.400",
+              bg: "blue.300",
               zIndex: -1,
             }}
           >
-            Un Platzi Punk
+            DOCHAIN 
           </Text>
           <br />
-          <Text as={"span"} color={"green.400"}>
-            nunca para de aprender
-          </Text>
         </Heading>
+        
         <Text color={"gray.500"}>
-          Platzi Punks es una colección de Avatares randomizados cuya metadata
-          es almacenada on-chain. Poseen características únicas y sólo hay 10000
-          en existencia.
+          Los documentos legales de un folder fisico legal estan vulnerables en cuanto a su integridad a causa de acceso al mismo por parte de personas no relacionadas al caso, por lo tanto existe la posibilidad de alterar el mismo.
         </Text>
-        <Text color={"green.500"}>
-          Cada Platzi Punk se genera de forma secuencial basado en tu address,
-          usa el previsualizador para averiguar cuál sería tu Platzi Punk si
-          minteas en este momento
+        
+        <Text color={"blue.300"}>
+          <chakra.span as='b'> DOCHAIN </chakra.span>es una dapp donde cada uno de los tipos de documentos legales se almacenan en un Blockchain y solo tengan acceso a cada portafolio las personas y/o entidades que solo deberian tener acceso (abogados, jueces y demás entidades involucrados en el caso).
         </Text>
-        <Stack
-          spacing={{ base: 4, sm: 6 }}
-          direction={{ base: "column", sm: "row" }}
-        >
-          <Button
-            rounded={"full"}
-            size={"lg"}
-            fontWeight={"normal"}
-            px={6}
-            colorScheme={"green"}
-            bg={"green.400"}
-            _hover={{ bg: "green.500" }}
-          >
-            Obtén tu punk
-          </Button>
-          {/* <Link to="/punks"> */}
-            <Button rounded={"full"} size={"lg"} fontWeight={"normal"} px={6}>
-              Galería
-            </Button>
-          {/* </Link> */}
-        </Stack>
       </Stack>
+      
       <Flex
         flex={1}
         direction="column"
@@ -85,37 +62,10 @@ const Home = () => {
         position={"relative"}
         w={"full"}
       >
-        {/* <Image src={active ? imageSrc : "https://avataaars.io/"} />
-        {active ? (
-          <>
-            <Flex mt={2}>
-              <Badge>
-                Next ID:
-                <Badge ml={1} colorScheme="green">
-                  1
-                </Badge>
-              </Badge>
-              <Badge ml={2}>
-                Address:
-                <Badge ml={1} colorScheme="green">
-                  0x0000...0000
-                </Badge>
-              </Badge>
-            </Flex>
-            <Button
-              onClick={getPlatziPunksData}
-              mt={4}
-              size="xs"
-              colorScheme="green"
-            >
-              Actualizar
-            </Button>
-          </>
-        ) : (
-          <Badge mt={2}>Wallet desconectado</Badge>
-        )} */}
+        <Image src={"./images/Ethereum_Flatline.svg"} width="750px"/>
       </Flex>
     </Stack>
   </>;
 };
+
 export default Home;
