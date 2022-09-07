@@ -16,6 +16,7 @@ import {
 
 // eslint-disable-next-line no-unused-vars
 const CaseCard = ({ item }) => {
+  let bg = useColorModeValue('gray.50', 'gray.900');
   let secondaryBg = useColorModeValue("gray.50", "whiteAlpha.100");
   let mainText = useColorModeValue("gray.800", "white");
 
@@ -25,8 +26,8 @@ const CaseCard = ({ item }) => {
       h='auto'
       w={{ base: "315px", md: "345px" }}
       direction='column'
-      boxShadow='dark-lg'>
-
+      boxShadow='dark-lg'
+      bg={bg}>
       <Box p='20px'>
         <Box w='100%'>
           <Text
