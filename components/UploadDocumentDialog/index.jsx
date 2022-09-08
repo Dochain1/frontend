@@ -137,6 +137,7 @@ const UploadDocumentDialog = ({ caseId }) => {
                 placeholder="Tipo de documento"
                 value={uploadDocument.documentType}
                 onChange={onChangeHandler}
+                name='documentType'
               >
                 {documentTypes.map((documentType, index) => {
                   return (
@@ -151,11 +152,12 @@ const UploadDocumentDialog = ({ caseId }) => {
             <FormControl id="documentFile" isRequired mb="10px">
               <FormLabel>Documento</FormLabel>
               <Input
-                placeholder="Lugar del caso"
+                placeholder="Documento"
                 _placeholder={{ color: 'gray.500' }}
                 type="file"
                 name="casePlace"
                 onChange={onChangeFileInput}
+                py={1}
               />
             </FormControl>
           </ModalBody>
