@@ -85,6 +85,9 @@ const Navbar = () => {
       width="100%"
       bg={useColorModeValue('gray.50', 'gray.900')}
       px={4}
+      boxShadow='dark-lg'
+      position={'fixed'}
+      zIndex={1}
     >
       <Flex
         bg={useColorModeValue('gray.50', 'gray.900')}

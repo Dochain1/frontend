@@ -17,7 +17,15 @@ const Layout = ({ children }) => {
     </Head>
     <Flex minH="100vh" direction="column">
       <Navbar />
-      <Box mx="auto" flex={1} p={4} maxW={"7xl"} width="100%">
+      <Box 
+        pt={'100px'}
+        mx="auto" 
+        flex={1} 
+        px={4}
+        pb={4} 
+        maxW={"7xl"} 
+        width="100%"
+      >
         {children}
       </Box>
       <Footer />
