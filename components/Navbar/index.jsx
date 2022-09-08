@@ -111,7 +111,7 @@ const Navbar = () => {
           </Flex>
           <HStack
             as={"nav"}
-            spacing={4}
+            spacing={1}
             display={{ base: "none", md: "flex" }}
           >
             {renderLinks(active)}
@@ -121,6 +121,9 @@ const Navbar = () => {
           as={"nav"}
           spacing={4}
         >
+          <Center height='50px'>
+            <Divider orientation='vertical' />
+          </Center>
           <ColorModeSwitch/>
           <Center height='50px'>
             <Divider orientation='vertical' />
