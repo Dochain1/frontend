@@ -77,69 +77,66 @@ const renderLinks = (active) => {
 
 const Navbar = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
-  // eslint-disable-next-line no-unused-vars
-  const { active, account, library } = useWeb3React();
+  const { active } = useWeb3React();
 
   return (
-    <>
-      <Box
-        mx="auto"
-        maxW={"7xl"}
-        width="100%"
+    <Box
+      mx="auto"
+      width="100%"
+      bg={useColorModeValue('gray.50', 'gray.900')}
+      px={4}
+    >
+      <Flex
         bg={useColorModeValue('gray.50', 'gray.900')}
+        color={useColorModeValue("gray.600", "white")}
+        minH={"60px"}
+        py={{ base: 2 }}
+        px={{ base: 4 }}
+        borderBottom={1}
+        borderStyle={"solid"}
+        borderColor={useColorModeValue("gray.200", "gray.900")}
+        alignItems={"center"}
+        justifyContent={"space-between"}
       >
-        <Flex
-          bg={useColorModeValue('gray.50', 'gray.900')}
-          color={useColorModeValue("gray.600", "white")}
-          minH={"60px"}
-          py={{ base: 2 }}
-          px={{ base: 4 }}
-          borderBottom={1}
-          borderStyle={"solid"}
-          borderColor={useColorModeValue("gray.200", "gray.900")}
-          alignItems={"center"}
-          justifyContent={"space-between"}
-        >
-          <IconButton
-            size={"md"}
-            icon={isOpen ? <CloseIcon /> : <HamburgerIcon />}
-            aria-label={"Open Menu"}
-            display={{ md: "none" }}
-            onClick={isOpen ? onClose : onOpen}
-          />
-          <HStack spacing={8} alignItems={"center"}>
-            <Flex alignItems="center">
-              <Image src="./images/logo.png" width="80px" />
-            </Flex>
-            <HStack
-              as={"nav"}
-              spacing={4}
-              display={{ base: "none", md: "flex" }}
-            >
-              {renderLinks(active)}
-            </HStack>
-          </HStack>
+        <IconButton
+          size={"md"}
+          icon={isOpen ? <CloseIcon /> : <HamburgerIcon />}
+          aria-label={"Open Menu"}
+          display={{ md: "none" }}
+          onClick={isOpen ? onClose : onOpen}
+        />
+        <HStack spacing={8} alignItems={"center"}>
+          <Flex alignItems="center">
+            <Image src="./images/logo.png" width="80px" />
+          </Flex>
           <HStack
             as={"nav"}
             spacing={4}
+            display={{ base: "none", md: "flex" }}
           >
-            <ColorModeSwitch/>
-            <Center height='50px'>
-              <Divider orientation='vertical' />
-            </Center>
-            <LoginButton/>
+            {renderLinks(active)}
           </HStack>
-        </Flex>
+        </HStack>
+        <HStack
+          as={"nav"}
+          spacing={4}
+        >
+          <ColorModeSwitch/>
+          <Center height='50px'>
+            <Divider orientation='vertical' />
+          </Center>
+          <LoginButton/>
+        </HStack>
+      </Flex>
 
-        {isOpen ? (
-          <Box pb={4} display={{ md: "none" }}>
-            <Stack as={"nav"} spacing={4}>
-              {renderLinks(active)}
-            </Stack>
-          </Box>
-        ) : null}
-      </Box>
-    </>
+      {isOpen ? (
+        <Box pb={4} display={{ md: "none" }}>
+          <Stack as={"nav"} spacing={4}>
+            {renderLinks(active)}
+          </Stack>
+        </Box>
+      ) : null}
+    </Box>
   );
 };
 
