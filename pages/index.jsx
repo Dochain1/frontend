@@ -82,7 +82,7 @@ const Home = () => {
         position={"relative"}
         w={"full"}
       >
-        <Image src={"./images/ethereumFlatline.svg"} width="750px"/>
+        <Image src={"./images/Ethereum_Flatline.png"} width="750px"/>
       </Flex>
     </Stack>
   </>;
