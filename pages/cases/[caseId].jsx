@@ -13,7 +13,7 @@ import {
   Th,
   Td,
   TableContainer,
-  useColorModeValue
+  useColorModeValue,
 } from '@chakra-ui/react';
 import { ArrowForwardIcon } from '@chakra-ui/icons';
 import { useWeb3React } from '@web3-react/core';
@@ -80,7 +80,7 @@ const Case = () => {
     <>
       <Box>
         <Heading as="h2" fontSize="4xl" textAlign="center" p="0px">
-          Documentos del caso: {caseId}
+          Documentos del caso: {`CBBA500${caseId}`}
         </Heading>
       </Box>
 
@@ -88,8 +88,14 @@ const Case = () => {
         <UploadDocumentDialog caseId={caseId} alignItems="center" />
       </Box>
 
-      <TableContainer p="40px" mt="20px" borderRadius='10px' boxShadow='2xl' bg={bg}>
-        <Table variant="striped" size='lg'>
+      <TableContainer
+        p="40px"
+        mt="20px"
+        borderRadius="10px"
+        boxShadow="2xl"
+        bg={bg}
+      >
+        <Table variant="striped" size="lg">
           <Thead>
             <Tr>
               <Th fontSize="xl">Documento</Th>

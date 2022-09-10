@@ -6,27 +6,16 @@ const API_URL = process.env.NEXT_PUBLIC_API_URL;
 
 const useApi = () => {
   const [loading, setLoading] = useState(false);
-  const addBriefcase = async (data) => {
-    const briefcase = {
-      type_of_demand: data.typeComplaint,
-      crime: data.crime,
-      crime_data: data.crimeDate,
-      name_of_plaintiff: data.demanding,
-      plaintiffs_attorney: data.demandingLawyer,
-      name_of_defendant: data.defendant,
-      defendants_attorney: data.defendantLawyer,
-      place_of_case: data.casePlace,
-      place_of_crime: data.crimePlace,
-    };
 
-    const response = await axios.post(
-      'https://api-dochain.herokuapp.com/api/v1/briefcase/',
-      briefcase,
-      options
-    );
+  //add a case
+  const addBriefcase = async (data) => {
+    setLoading(true);
+    const response = await axios.post(`${API_URL}briefcase`, data, options);
+    setLoading(false);
     return response;
   };
 
+  //get all cases
   const getBriefcases = async () => {
     setLoading(true);
     try {
@@ -39,17 +28,61 @@ const useApi = () => {
     }
   };
 
-  return { loading, addBriefcase, getBriefcases };
+  //get all cases
+  const getBriefcasesByAddress = async (account) => {
+    setLoading(true);
+    try {
+      const response = await axios.get(
+        `${API_URL}briefcase/user/${account}`,
+        options
+      );
+      setLoading(false);
+      return response.data;
+    } catch (error) {
+      console.log(error);
+      setLoading(false);
+    }
+  };
+
+  //get a case
+  const getBriefcase = async (id) => {
+    setLoading(true);
+    try {
+      const response = await axios.get(`${API_URL}briefcase/${id}`, options);
+      setLoading(false);
+      return response.data;
+    } catch (error) {
+      console.log(error);
+      setLoading(false);
+    }
+  };
+
+  //register a user and his publicKey
+  const register = async (publicKey, account) => {
+    setLoading(true);
+    const body = { address: account, publicKey: publicKey };
+    try {
+      const response = await axios.post(
+        `${API_URL}documents/register`,
+        body,
+        options
+      );
+      setLoading(false);
+      return response.data;
+    } catch (error) {
+      console.log(error);
+      setLoading(false);
+    }
+  };
+
+  return {
+    loading,
+    addBriefcase,
+    getBriefcases,
+    getBriefcase,
+    register,
+    getBriefcasesByAddress,
+  };
 };
 
 export default useApi;
-
-// type_of_demand
-// crime
-// crime_data
-// name_of_plaintiff
-// plaintiffs_attorney
-// name_of_defendant
-// defendants_attorney
-// place_of_case
-// place_of_crime

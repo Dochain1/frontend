@@ -59,7 +59,7 @@ const CaseCard = ({ item }) => {
               fontSize="l"
               pt="10px"
             >
-              {item.type_of_demand.toUpperCase()}
+              {item.typeComplaint.toUpperCase()}
             </Text>
           </Box>
         </Box>
@@ -227,7 +227,7 @@ const CaseCard = ({ item }) => {
         <Box p="20px">
           <Flex w="100%" mb="10px">
             <Spacer />
-            <Link href={'/cases/' + item}>
+            <Link href={`/cases/${item.case_id}`}>
               <Button
                 variant={'solid'}
                 colorScheme={'green'}

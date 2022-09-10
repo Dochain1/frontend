@@ -12,22 +12,25 @@ import {
   Input,
   Textarea,
   useDisclosure,
+  useToast,
 } from '@chakra-ui/react';
 import { CloseIcon, AddIcon } from '@chakra-ui/icons';
 import { FaSave } from 'react-icons/fa';
 import useApi from '../../hooks/useApi';
+import { useWeb3React } from '@web3-react/core';
 
 const ComplaintDialog = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const { addBriefcase } = useApi();
+  const { account } = useWeb3React();
+  const { addBriefcase, loading } = useApi();
   const form = useRef(null);
+  const toast = useToast();
 
   const [complaint, setComplaint] = useState({
     typeComplaint: '',
-    dateAndTimeOfComplaint: new Date(),
     casePlace: '',
     crime: '',
-    crimeDate: '',
+    dateAndTimeOfComplaint: '',
     crimePlace: '',
     defendant: '',
     demanding: '',
@@ -41,18 +44,33 @@ const ComplaintDialog = () => {
 
   const saveComplaint = async (e) => {
     e.preventDefault();
-    const res = await addBriefcase(complaint);
-    console.log(res);
-    //closeDialog();
+    try {
+      await addBriefcase({ ...complaint, users: [account] });
+      toast({
+        title: 'Caso creado correctamente',
+        description: 'Su denuncia fue añadida a nuestros registros',
+        status: 'success',
+        duration: 9000,
+        isClosable: true,
+      });
+      closeDialog();
+    } catch (e) {
+      toast({
+        title: 'Ocurrió un error',
+        description: 'No te preocupes, no es tu culpa',
+        status: 'error',
+        duration: 9000,
+        isClosable: true,
+      });
+    }
   };
 
   const closeDialog = () => {
     setComplaint({
       typeComplaint: '',
-      dateAndTimeOfComplaint: new Date(),
       casePlace: '',
       crime: '',
-      crimeDate: '',
+      dateAndTimeOfComplaint: '',
       crimePlace: '',
       defendant: '',
       demanding: '',
@@ -75,7 +93,7 @@ const ComplaintDialog = () => {
       </Button>
 
       <Modal onClose={onClose} isOpen={isOpen}>
-        <form ref={form} onSubmit={saveComplaint}>
+        <form ref={form} onSubmit={saveComplaint} disabled={loading}>
           <ModalOverlay />
           <ModalContent>
             <ModalHeader>Nueva Denuncia</ModalHeader>
@@ -122,8 +140,8 @@ const ComplaintDialog = () => {
                   placeholder="Fecha de Crimen"
                   _placeholder={{ color: 'gray.500' }}
                   type="date"
-                  name="crimeDate"
-                  value={complaint.crimeDate}
+                  name="dateAndTimeOfComplaint"
+                  value={complaint.dateAndTimeOfComplaint}
                   onChange={onChangeHandler}
                 />
               </FormControl>
@@ -206,6 +224,7 @@ const ComplaintDialog = () => {
                 size={'sm'}
                 leftIcon={<FaSave />}
                 type="submit"
+                isLoading={loading}
               >
                 Guardar
               </Button>

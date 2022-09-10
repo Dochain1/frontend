@@ -8,11 +8,12 @@ import { useWeb3React } from '@web3-react/core';
 const Cases = () => {
   // eslint-disable-next-line no-unused-vars
   const [briefcase, setBriefcases] = useState([]);
-  const { active } = useWeb3React();
-  const { getBriefcases, loading } = useApi();
+  const { active, account } = useWeb3React();
+  const { getBriefcasesByAddress, loading } = useApi();
 
   const fetchData = async () => {
-    const res = await getBriefcases();
+    const res = await getBriefcasesByAddress(account);
+    console.log(account);
     setBriefcases(res);
   };
 
@@ -21,7 +22,7 @@ const Cases = () => {
     if (active) {
       fetchData();
     }
-  }, [active]);
+  }, [active, account]);
 
   return (
     <>
