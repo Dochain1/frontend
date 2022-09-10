@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { 
+import React, { useRef, useState } from 'react';
+import {
   Button,
   Modal,
   ModalContent,
@@ -11,199 +11,210 @@ import {
   FormLabel,
   Input,
   Textarea,
-  useDisclosure 
+  useDisclosure,
 } from '@chakra-ui/react';
 import { CloseIcon, AddIcon } from '@chakra-ui/icons';
 import { FaSave } from 'react-icons/fa';
-
+import useApi from '../../hooks/useApi';
 
 const ComplaintDialog = () => {
-    const { isOpen, onOpen, onClose } = useDisclosure()
+  const { isOpen, onOpen, onClose } = useDisclosure();
+  const { addBriefcase } = useApi();
+  const form = useRef(null);
 
-    const [complaint, setComplaint] = useState({
-      typeComplaint : "",
-      dateAndTimeOfComplaint : new Date(),
-      casePlace : "",
-      crime : "",
-      crimeDate : "",
-      crimePlace : "",
-      defendant : "",
-      demanding : "",
-      defendantLawyer : "",
-      demandingLawyer : "",
+  const [complaint, setComplaint] = useState({
+    typeComplaint: '',
+    dateAndTimeOfComplaint: new Date(),
+    casePlace: '',
+    crime: '',
+    crimeDate: '',
+    crimePlace: '',
+    defendant: '',
+    demanding: '',
+    defendantLawyer: '',
+    demandingLawyer: '',
+  });
+
+  const onChangeHandler = (event) => {
+    setComplaint({ ...complaint, [event.target.name]: event.target.value });
+  };
+
+  const saveComplaint = async (e) => {
+    e.preventDefault();
+    const res = await addBriefcase(complaint);
+    console.log(res);
+    //closeDialog();
+  };
+
+  const closeDialog = () => {
+    setComplaint({
+      typeComplaint: '',
+      dateAndTimeOfComplaint: new Date(),
+      casePlace: '',
+      crime: '',
+      crimeDate: '',
+      crimePlace: '',
+      defendant: '',
+      demanding: '',
+      defendantLawyer: '',
+      demandingLawyer: '',
     });
+    onClose();
+  };
 
-    const onChangeHandler = (event) => {
-      setComplaint({ ...complaint, [event.target.name]: event.target.value });
-    };
-
-    const saveComplaint = () => {
-      //save Complaint to Blockchain
-      closeDialog();
-    }
-
-    const closeDialog = () =>{
-      setComplaint({
-        typeComplaint : "",
-        dateAndTimeOfComplaint : new Date(),
-        casePlace : "",
-        crime : "",
-        crimeDate : "",
-        crimePlace : "",
-        defendant : "",
-        demanding : "",
-        defendantLawyer : "",
-        demandingLawyer : "",
-      })
-      onClose();
-    }
-
-    return <>
+  return (
+    <>
       <Button
-        variant={"solid"}
-        colorScheme={"green"}
-        size={"sm"}
+        variant={'solid'}
+        colorScheme={'green'}
+        size={'sm'}
         leftIcon={<AddIcon />}
         onClick={onOpen}
-      >Nueva Denuncia
+      >
+        Nueva Denuncia
       </Button>
 
       <Modal onClose={onClose} isOpen={isOpen}>
-        <ModalOverlay />
-        <ModalContent>
-          <ModalHeader>Nueva Denuncia</ModalHeader>
-          
-          <ModalBody>
-            <FormControl id="typeComplaint" isRequired mb='10px'>
-              <FormLabel>Tipo de denuncia</FormLabel>
-              <Input
-                placeholder="Tipo de denuncia"
-                _placeholder={{ color: 'gray.500' }}
-                type="text"
-                name="typeComplaint"
-                value={complaint.typeComplaint}
-                onChange={onChangeHandler}
-              />
-            </FormControl>
+        <form ref={form} onSubmit={saveComplaint}>
+          <ModalOverlay />
+          <ModalContent>
+            <ModalHeader>Nueva Denuncia</ModalHeader>
 
-            <FormControl id="casePlace" isRequired mb='10px'>
-              <FormLabel>Lugar del caso</FormLabel>
-              <Input
-                placeholder="Lugar del caso"
-                _placeholder={{ color: 'gray.500' }}
-                type="text"
-                name="casePlace"
-                value={complaint.casePlace}
-                onChange={onChangeHandler}
-              />
-            </FormControl>
+            <ModalBody>
+              <FormControl id="typeComplaint" isRequired mb="10px">
+                <FormLabel>Tipo de denuncia</FormLabel>
+                <Input
+                  placeholder="Tipo de denuncia"
+                  _placeholder={{ color: 'gray.500' }}
+                  type="text"
+                  name="typeComplaint"
+                  value={complaint.typeComplaint}
+                  onChange={onChangeHandler}
+                />
+              </FormControl>
 
-            <FormControl id="crime" isRequired mb='10px'>
-              <FormLabel>Crimen</FormLabel>
-              <Textarea
-                name="crime"
-                onChange={onChangeHandler}
-                placeholder="Crimen"
-                _placeholder={{ color: 'gray.500' }}
-                size='sm'
-              />
-            </FormControl>
+              <FormControl id="casePlace" isRequired mb="10px">
+                <FormLabel>Lugar del caso</FormLabel>
+                <Input
+                  placeholder="Lugar del caso"
+                  _placeholder={{ color: 'gray.500' }}
+                  type="text"
+                  name="casePlace"
+                  value={complaint.casePlace}
+                  onChange={onChangeHandler}
+                />
+              </FormControl>
 
-            <FormControl id="crimeDate" isRequired mb='10px'>
-              <FormLabel>Fecha de Crimen</FormLabel>
-              <Input
-                placeholder="Fecha de Crimen"
-                _placeholder={{ color: 'gray.500' }}
-                type="date"
-                name="crimeDate"
-                value={complaint.crimeDate}
-                onChange={onChangeHandler}
-              />
-            </FormControl>
+              <FormControl id="crime" isRequired mb="10px">
+                <FormLabel>Crimen</FormLabel>
+                <Textarea
+                  name="crime"
+                  onChange={onChangeHandler}
+                  placeholder="Crimen"
+                  _placeholder={{ color: 'gray.500' }}
+                  size="sm"
+                />
+              </FormControl>
 
-            <FormControl id="crimePlace" isRequired mb='10px'>
-              <FormLabel>Lugar de Crimen</FormLabel>
-              <Input
-                placeholder="Lugar de Crimen"
-                _placeholder={{ color: 'gray.500' }}
-                type="text"
-                name="crimePlace"
-                value={complaint.crimePlace}
-                onChange={onChangeHandler}
-              />
-            </FormControl>
-            
-            <FormControl id="defendant" isRequired mb='10px'>
-              <FormLabel>Nombre del demandante</FormLabel>
-              <Input
-                placeholder="Nombre del demandante"
-                _placeholder={{ color: 'gray.500' }}
-                type="text"
-                name="defendant"
-                value={complaint.defendant}
-                onChange={onChangeHandler}
-              />
-            </FormControl>
-            
-            <FormControl id="demanding" isRequired mb='10px'>
-              <FormLabel>Nombre del demandado</FormLabel>
-              <Input
-                placeholder="Nombre del demandado"
-                _placeholder={{ color: 'gray.500' }}
-                type="text"
-                name="demanding"
-                value={complaint.demanding}
-                onChange={onChangeHandler}
-              />
-            </FormControl>
+              <FormControl id="crimeDate" isRequired mb="10px">
+                <FormLabel>Fecha de Crimen</FormLabel>
+                <Input
+                  placeholder="Fecha de Crimen"
+                  _placeholder={{ color: 'gray.500' }}
+                  type="date"
+                  name="crimeDate"
+                  value={complaint.crimeDate}
+                  onChange={onChangeHandler}
+                />
+              </FormControl>
 
-            <FormControl id="defendantLawyer" isRequired mb='10px'>
-              <FormLabel>Abogado del demandante</FormLabel>
-              <Input
-                placeholder="Abogado del demandante"
-                _placeholder={{ color: 'gray.500' }}
-                type="text"
-                name="defendantLawyer"
-                value={complaint.defendantLawyer}
-                onChange={onChangeHandler}
-              />
-            </FormControl>
+              <FormControl id="crimePlace" isRequired mb="10px">
+                <FormLabel>Lugar de Crimen</FormLabel>
+                <Input
+                  placeholder="Lugar de Crimen"
+                  _placeholder={{ color: 'gray.500' }}
+                  type="text"
+                  name="crimePlace"
+                  value={complaint.crimePlace}
+                  onChange={onChangeHandler}
+                />
+              </FormControl>
 
-            <FormControl id="demandingLawyer" isRequired mb='10px'>
-              <FormLabel>Abogado del demandado</FormLabel>
-              <Input
-                placeholder="Abogado del demandado"
-                _placeholder={{ color: 'gray.500' }}
-                type="text"
-                name="demandingLawyer"
-                value={complaint.demandingLawyer}
-                onChange={onChangeHandler}
-              />
-            </FormControl>     
-          </ModalBody>
+              <FormControl id="defendant" isRequired mb="10px">
+                <FormLabel>Nombre del demandante</FormLabel>
+                <Input
+                  placeholder="Nombre del demandante"
+                  _placeholder={{ color: 'gray.500' }}
+                  type="text"
+                  name="defendant"
+                  value={complaint.defendant}
+                  onChange={onChangeHandler}
+                />
+              </FormControl>
 
-          <ModalFooter>
-            <Button
-              variant={"solid"}
-              colorScheme={"red"}
-              size={"sm"}
-              leftIcon={<CloseIcon />}
-              onClick={() => closeDialog()}
-              mr={3}
-            >Cancelar
-            </Button>
-            <Button
-              variant={"solid"}
-              colorScheme={"green"}
-              size={"sm"}
-              leftIcon={<FaSave />}
-              onClick={() => saveComplaint()}
-            >Guardar
-            </Button>
-          </ModalFooter>
-        </ModalContent>
+              <FormControl id="demanding" isRequired mb="10px">
+                <FormLabel>Nombre del demandado</FormLabel>
+                <Input
+                  placeholder="Nombre del demandado"
+                  _placeholder={{ color: 'gray.500' }}
+                  type="text"
+                  name="demanding"
+                  value={complaint.demanding}
+                  onChange={onChangeHandler}
+                />
+              </FormControl>
+
+              <FormControl id="defendantLawyer" isRequired mb="10px">
+                <FormLabel>Abogado del demandante</FormLabel>
+                <Input
+                  placeholder="Abogado del demandante"
+                  _placeholder={{ color: 'gray.500' }}
+                  type="text"
+                  name="defendantLawyer"
+                  value={complaint.defendantLawyer}
+                  onChange={onChangeHandler}
+                />
+              </FormControl>
+
+              <FormControl id="demandingLawyer" isRequired mb="10px">
+                <FormLabel>Abogado del demandado</FormLabel>
+                <Input
+                  placeholder="Abogado del demandado"
+                  _placeholder={{ color: 'gray.500' }}
+                  type="text"
+                  name="demandingLawyer"
+                  value={complaint.demandingLawyer}
+                  onChange={onChangeHandler}
+                />
+              </FormControl>
+            </ModalBody>
+
+            <ModalFooter>
+              <Button
+                variant={'solid'}
+                colorScheme={'red'}
+                size={'sm'}
+                leftIcon={<CloseIcon />}
+                onClick={() => closeDialog()}
+                mr={3}
+              >
+                Cancelar
+              </Button>
+              <Button
+                variant={'solid'}
+                colorScheme={'green'}
+                size={'sm'}
+                leftIcon={<FaSave />}
+                type="submit"
+              >
+                Guardar
+              </Button>
+            </ModalFooter>
+          </ModalContent>
+        </form>
       </Modal>
-    </>;
+    </>
+  );
 };
 
 export default ComplaintDialog;
