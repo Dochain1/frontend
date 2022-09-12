@@ -1,7 +1,7 @@
 import React from 'react';
 import { MdPlace, MdRemoveRedEye, MdCheckCircle } from 'react-icons/md';
 import { BsUnlockFill } from 'react-icons/bs';
-import { FaUserAlt, FaUserPlus, FaUserTie, FaUsers } from "react-icons/fa";
+import { FaUserAlt, FaUserTie, FaUsers } from "react-icons/fa";
 import Link from 'next/link';
 import {
   Accordion,
@@ -10,17 +10,18 @@ import {
   AccordionPanel,
   AccordionIcon,
   Box,
-  Flex,
   Button,
+  Flex,
   Icon,
   List,
   ListItem,
   ListIcon,
-  Text,
   Spacer,
+  Text,
   useColorModeValue,
 } from "@chakra-ui/react";
 import useTruncatedAddress from '../../hooks/useTruncatedAddress';
+import AssignedToCase from '../AssignedToCase';
 
 // eslint-disable-next-line no-unused-vars
 const CaseCard = ({ item }) => {
@@ -119,7 +120,7 @@ const CaseCard = ({ item }) => {
                 Nombre            
               </Text>
               <Text color='gray.500' fontSize='sm' my='auto' fontWeight='500' lineHeight='24px' mt='-5px'>
-                Abogado Demandante
+                Abogado/a Demandante
               </Text>
             </Box>
           </Flex>
@@ -157,7 +158,7 @@ const CaseCard = ({ item }) => {
                 Nombre
               </Text>
               <Text color='gray.500' fontSize='sm' my='auto' fontWeight='500' lineHeight='24px' >
-                Abogado Demandado
+                Abogado/a Demandado
               </Text>
             </Box>
           </Flex>
@@ -197,7 +198,7 @@ const CaseCard = ({ item }) => {
                     <AccordionButton pl={1}>
                       <Box flex='1' textAlign='left'>
                         <Text color={mainText} fontSize='sm' my='auto' fontWeight='500'>
-                          Involucrados asignados
+                          Involucrados/as asignados/as
                         </Text>
                       </Box>
                       <AccordionIcon />
@@ -205,14 +206,12 @@ const CaseCard = ({ item }) => {
                   </h2>
                   <AccordionPanel pb={4}>
                     <List spacing={3}>
-
-                    {truncatedAddressAssignes.map((item, index) => {
-                      return <ListItem key={index}>
-                        <ListIcon as={MdCheckCircle} color='green.500' />
-                        { item.truncatedAddressAssigne }
-                      </ListItem>
-                    })}
-                      
+                      {truncatedAddressAssignes.map((item, index) => {
+                        return <ListItem key={index}>
+                          <ListIcon as={MdCheckCircle} color='green.500' />
+                          { item.truncatedAddressAssigne }
+                        </ListItem>
+                      })}                      
                     </List>
                   </AccordionPanel>
                 </AccordionItem>
@@ -224,13 +223,7 @@ const CaseCard = ({ item }) => {
       <Box p='20px'>
         <Flex w='100%' mb='10px'>
           <Spacer/>
-          <Button
-            variant={"solid"}
-            colorScheme={"green"}
-            size={"sm"}
-            leftIcon={<FaUserPlus />}
-          >Asiganción
-          </Button>
+          <AssignedToCase/>
           <Link href={'/cases/' + item}>
             <Button
               variant={"solid"}
