@@ -75,6 +75,42 @@ const useApi = () => {
     }
   };
 
+  //get breifcase documents
+  const getDocuments = async (caseId) => {
+    setLoading(true);
+    const body = { caseId };
+    try {
+      const response = await axios.post(
+        `${API_URL}documents/get_documents`,
+        body,
+        options
+      );
+      setLoading(false);
+      return response.data;
+    } catch (error) {
+      console.log(error);
+      setLoading(false);
+    }
+  };
+
+  //get a file
+  const getFile = async (address, tokenId, cid) => {
+    setLoading(true);
+    const body = { address, tokenId, cid };
+    try {
+      const response = await axios.post(
+        `${API_URL}documents/get_file`,
+        body,
+        options
+      );
+      setLoading(false);
+      return response.data;
+    } catch (error) {
+      console.log(error);
+      setLoading(false);
+    }
+  };
+
   return {
     loading,
     addBriefcase,
@@ -82,6 +118,8 @@ const useApi = () => {
     getBriefcase,
     register,
     getBriefcasesByAddress,
+    getDocuments,
+    getFile,
   };
 };
 

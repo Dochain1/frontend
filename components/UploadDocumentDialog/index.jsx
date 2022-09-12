@@ -57,13 +57,13 @@ const UploadDocumentDialog = ({ caseId }) => {
 
     let formData = new FormData();
     const publicKey = await getPublicKey(account);
-    const keys = [publicKey, publicKey];
+    const keys = [account, account];
     for (const key of keys) {
-      formData.append('keys', key);
+      formData.append('address', key);
     }
     formData.append('document', uploadDocument.documentFile);
     formData.append('documentName', uploadDocument.documentName);
-    formData.append('documentType', uploadDocument.documentType);
+    formData.append('type', uploadDocument.documentType);
     formData.append(
       'dateAndTimeOfUploadDocument',
       uploadDocument.dateAndTimeOfUploadDocument
@@ -78,9 +78,10 @@ const UploadDocumentDialog = ({ caseId }) => {
       }
     );
     const res = await response.json();
-    const payload = { cid: res.data.cid, privateKeys: res.data.privateKey };
-    storeData(payload);
-    closeDialog();
+    console.log(res);
+    //const payload = { cid: res.data.cid, privateKeys: res.data.privateKey };
+    //storeData(payload);
+    //closeDialog();
   };
 
   const closeDialog = () => {
@@ -137,7 +138,7 @@ const UploadDocumentDialog = ({ caseId }) => {
                 placeholder="Tipo de documento"
                 value={uploadDocument.documentType}
                 onChange={onChangeHandler}
-                name='documentType'
+                name="documentType"
               >
                 {documentTypes.map((documentType, index) => {
                   return (
