@@ -13,11 +13,9 @@ import {
   PopoverFooter,
   PopoverArrow,
   PopoverCloseButton,
-  Spacer,
   Stack,
   useDisclosure
 } from '@chakra-ui/react';
-import { CloseIcon } from '@chakra-ui/icons';
 import { FaSave, FaUserPlus } from 'react-icons/fa';
 import useTruncatedAddress from '../../hooks/useTruncatedAddress';
 
