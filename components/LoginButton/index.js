@@ -12,17 +12,22 @@ import {
 } from '@chakra-ui/react';
 import { AddIcon } from '@chakra-ui/icons';
 import { ethers } from 'ethers';
-
+import useApi from '../../hooks/useApi';
+import { getPublicKey } from '../../utils/encrypt';
+import { GlobalContext } from '../../contexts/GlobalContext';
+import { useContext } from 'react';
 const LoginButton = () => {
   const [balance, setBalance] = useState(0);
+  const { storeData } = useContext(GlobalContext);
   const { account, activate, active, deactivate, error, library } =
     useWeb3React();
+  const { registerCheck, register } = useApi();
   const isUnsupportedChain = error instanceof UnsupportedChainIdError;
 
   const connect = useCallback(() => {
     activate(connector);
     localStorage.setItem('previouslyConnected', 'true');
-  }, [active]);
+  }, [active, account]);
 
   const disconnect = () => {
     deactivate();
@@ -37,8 +42,30 @@ const LoginButton = () => {
   }, [library?.ethers, account]);
 
   useEffect(() => {
-    if (active) getBalance();
-  }, [active, getBalance]);
+    const fetchUser = async () => {
+      const response = await registerCheck(account);
+      let user = response.user;
+      if (response?.message != 'Usuario registrado') {
+        const publicKey = await getPublicKey(account);
+        try {
+          const res = await register(publicKey, account);
+          user = {
+            public_key: res,
+            name: null,
+            address: account,
+          };
+        } catch (e) {
+          console.log(e);
+        }
+      }
+      storeData(user);
+    };
+
+    if (active) {
+      getBalance();
+      fetchUser();
+    }
+  }, [active, getBalance, account]);
 
   //Do not disconnect when browser is refresh
   useEffect(() => {

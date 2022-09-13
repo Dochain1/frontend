@@ -78,6 +78,19 @@ const useApi = () => {
     }
   };
 
+  //check is register
+  const registerCheck = async (account) => {
+    try {
+      const response = await axios.get(
+        `${API_URL}/documents/isRegister/${account}`
+      );
+      return response.data;
+    } catch (error) {
+      console.log(error);
+      setLoading(false);
+    }
+  };
+
   //get breifcase documents
   const getDocuments = async (caseId) => {
     setLoading(true);
@@ -117,6 +130,7 @@ const useApi = () => {
   return {
     loading,
     error,
+    registerCheck,
     addBriefcase,
     getBriefcases,
     getBriefcase,
