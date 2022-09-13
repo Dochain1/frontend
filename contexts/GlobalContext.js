@@ -1,14 +1,13 @@
 import React, { createContext, useState } from 'react';
 const initialState = {
-  cid: '',
-  privateKeys: [],
+  user: {},
 };
 
 export const useInitialState = () => {
   const [state, setState] = useState(initialState);
 
   const storeData = (payload) => {
-    setState({ cid: payload.cid, privateKeys: payload.privateKeys });
+    setState({ ...state, user: payload });
   };
 
   return {

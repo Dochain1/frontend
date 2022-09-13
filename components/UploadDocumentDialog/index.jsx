@@ -12,6 +12,7 @@ import {
   Select,
   Input,
   useDisclosure,
+  useToast,
 } from '@chakra-ui/react';
 import { CloseIcon, AddIcon } from '@chakra-ui/icons';
 import { FaSave } from 'react-icons/fa';
@@ -22,6 +23,7 @@ import { decryptData, decryptPGP, getPublicKey } from '../../utils/encrypt';
 const UploadDocumentDialog = ({ caseId }) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { active, account } = useWeb3React();
+  const toast = useToast();
 
   const [uploadDocument, setUploadDocument] = useState({
     documentName: '',
@@ -77,8 +79,13 @@ const UploadDocumentDialog = ({ caseId }) => {
     );
     const res = await response.json();
     console.log(res);
-    //const payload = { cid: res.data.cid, privateKeys: res.data.privateKey };
-    //storeData(payload);
+    toast({
+      title: 'Archivo esperando para ser minteando',
+      description: 'Por favor  sea paciente estamos subiendo su archivo',
+      type: 'success',
+      isClosable: true,
+      duration: 9000,
+    });
     closeDialog();
   };
 
