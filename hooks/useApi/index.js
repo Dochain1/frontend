@@ -1,3 +1,4 @@
+import { useWeb3React } from '@web3-react/core';
 import axios from 'axios';
 import { useState } from 'react';
 const options = { headers: { 'Content-Type': 'application/json' } };
@@ -6,6 +7,8 @@ const API_URL = process.env.NEXT_PUBLIC_API_URL;
 
 const useApi = () => {
   const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(false);
+  const { account } = useWeb3React();
 
   //add a case
   const addBriefcase = async (data) => {
@@ -39,7 +42,7 @@ const useApi = () => {
       setLoading(false);
       return response.data;
     } catch (error) {
-      console.log(error);
+      setError(true);
       setLoading(false);
     }
   };
@@ -94,9 +97,9 @@ const useApi = () => {
   };
 
   //get a file
-  const getFile = async (address, tokenId, cid) => {
+  const getFile = async (tokenId, cid) => {
     setLoading(true);
-    const body = { address, tokenId, cid };
+    const body = { address: account, tokenId, cid };
     try {
       const response = await axios.post(
         `${API_URL}documents/get_file`,
@@ -113,6 +116,7 @@ const useApi = () => {
 
   return {
     loading,
+    error,
     addBriefcase,
     getBriefcases,
     getBriefcase,

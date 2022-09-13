@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useState } from 'react';
 import { useRouter } from 'next/router';
 import UploadDocumentDialog from '../../components/UploadDocumentDialog';
 import {
@@ -14,20 +14,20 @@ import {
   Td,
   TableContainer,
   useColorModeValue,
+  useToast,
 } from '@chakra-ui/react';
 import { ArrowForwardIcon } from '@chakra-ui/icons';
-import { useWeb3React } from '@web3-react/core';
 import { decryptData, decryptPGP } from '../../utils/encrypt';
-import { GlobalContext } from '../../contexts/GlobalContext';
 import { useEffect } from 'react';
 import useApi from '../../hooks/useApi';
+import { useWeb3React } from '@web3-react/core';
 
 const Case = () => {
   // eslint-disable-next-line no-unused-vars
   const [documents, setDocuments] = useState([]);
   const { account } = useWeb3React();
-  const { state } = useContext(GlobalContext);
   const { getDocuments, getFile } = useApi();
+  const toast = useToast();
   const {
     query: { caseId },
   } = useRouter();
@@ -49,23 +49,35 @@ const Case = () => {
     fetchData();
   }, [caseId]);
 
-  const fetchEncryptedData = async (tokenId) => {
-    //const PK = state.privateKeys[0];
-    const response = await getFile(account, tokenId, caseId);
-    console.log(response);
-    // const privateKeyPGP = await decryptData(PK, account);
+  const fetchEncryptedData = async (tokenId, cid) => {
+    try {
+      const response = await getFile(tokenId, cid);
+      console.log(response);
+      const privateKeyPGP = await decryptData(
+        response.privateKeyEncrypted,
+        account
+      );
 
-    // const decryptFile = await decryptPGP(
-    //   new Uint8Array(res.encryptedFile.data),
-    //   privateKeyPGP
-    // );
-    // const fileToSave = new Blob([new Uint8Array(decryptFile)]);
-    // saveFile(fileToSave);
+      const decryptFile = await decryptPGP(
+        new Uint8Array(response.encryptedFile.data),
+        privateKeyPGP
+      );
+      const fileToSave = new Blob([new Uint8Array(decryptFile)]);
+      saveFile(fileToSave, response.name);
+    } catch (error) {
+      toast({
+        title: 'Ocurrió un error',
+        description: 'No se preocupe, no fue su culpa',
+        status: 'error',
+        duration: 9000,
+        isClosable: true,
+      });
+    }
   };
 
-  const saveFile = async (blob) => {
+  const saveFile = async (blob, filename) => {
     const a = document.createElement('a');
-    a.download = 'my-file.txt';
+    a.download = filename;
     a.href = URL.createObjectURL(blob);
     // eslint-disable-next-line no-unused-vars
     a.addEventListener('click', (_e) => {
@@ -137,7 +149,9 @@ const Case = () => {
                         colorScheme={'green'}
                         size="sm"
                         rightIcon={<ArrowForwardIcon />}
-                        onClick={() => fetchEncryptedData(document.token_id)}
+                        onClick={() =>
+                          fetchEncryptedData(document.token_id, document.uri)
+                        }
                       >
                         Abrir
                       </Button>

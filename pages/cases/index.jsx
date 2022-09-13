@@ -9,11 +9,11 @@ const Cases = () => {
   // eslint-disable-next-line no-unused-vars
   const [briefcase, setBriefcases] = useState([]);
   const { active, account } = useWeb3React();
-  const { getBriefcasesByAddress, loading } = useApi();
+  const { getBriefcasesByAddress, loading, error } = useApi();
 
   const fetchData = async () => {
     const res = await getBriefcasesByAddress(account);
-    console.log(account);
+    console.log(error);
     setBriefcases(res);
   };
 
@@ -44,10 +44,12 @@ const Cases = () => {
           gap="2"
         >
           {!loading
-            ? briefcase.map((item) => (
-                <CaseCard key={`case-${item.case_id}`} item={item} />
-              ))
-            : 'Cargando'}
+            ? !error
+              ? briefcase?.map((item) => (
+                  <CaseCard key={`case-${item.case_id}`} item={item} />
+                ))
+              : 'Ocurrió un error, no se preocupe, no ha sido su culpa'
+            : 'Cargando...'}
         </Flex>
       </Box>
     </>
