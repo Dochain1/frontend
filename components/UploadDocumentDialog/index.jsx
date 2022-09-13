@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   Button,
   Modal,
@@ -18,12 +18,10 @@ import { FaSave } from 'react-icons/fa';
 import { useWeb3React } from '@web3-react/core';
 // eslint-disable-next-line no-unused-vars
 import { decryptData, decryptPGP, getPublicKey } from '../../utils/encrypt';
-import { GlobalContext } from '../../contexts/GlobalContext';
 
 const UploadDocumentDialog = ({ caseId }) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { active, account } = useWeb3React();
-  const { storeData } = useContext(GlobalContext);
 
   const [uploadDocument, setUploadDocument] = useState({
     documentName: '',
@@ -56,7 +54,7 @@ const UploadDocumentDialog = ({ caseId }) => {
     console.log(uploadDocument);
 
     let formData = new FormData();
-    const publicKey = await getPublicKey(account);
+    //const publicKey = await getPublicKey(account);
     const keys = [account, account];
     for (const key of keys) {
       formData.append('address', key);
@@ -81,7 +79,7 @@ const UploadDocumentDialog = ({ caseId }) => {
     console.log(res);
     //const payload = { cid: res.data.cid, privateKeys: res.data.privateKey };
     //storeData(payload);
-    //closeDialog();
+    closeDialog();
   };
 
   const closeDialog = () => {

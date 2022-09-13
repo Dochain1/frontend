@@ -29,6 +29,13 @@ const CaseCard = ({ item }) => {
   let secondaryBg = useColorModeValue('gray.50', 'whiteAlpha.100');
   let mainText = useColorModeValue('gray.800', 'white');
 
+  const address = useTruncatedAddress(
+    '0x2XIgBoQJMDWxhrQCMLePi3WzP3k6yYRkNNdq0Ur5'
+  );
+  let truncatedAddressAssignes = Array(3).fill({
+    truncatedAddressAssigne: address,
+  });
+
   return (
     <Flex
       display={'inline-flex'}
@@ -295,7 +302,7 @@ const CaseCard = ({ item }) => {
           <Flex w="100%" mb="10px">
             <Spacer />
             <AssignedToCase />
-            <Link href={'/cases/' + item}>
+            <Link href={`/cases/${item.case_id}`}>
               <Button
                 variant={'solid'}
                 colorScheme={'green'}
@@ -307,22 +314,6 @@ const CaseCard = ({ item }) => {
               </Button>
             </Link>
           </Flex>
-
-          <Box p="20px">
-            <Flex w="100%" mb="10px">
-              <Spacer />
-              <Link href={`/cases/${item.case_id}`}>
-                <Button
-                  variant={'solid'}
-                  colorScheme={'green'}
-                  size={'sm'}
-                  leftIcon={<MdRemoveRedEye />}
-                >
-                  Abrir
-                </Button>
-              </Link>
-            </Flex>
-          </Box>
         </Box>
       </Box>
     </Flex>
