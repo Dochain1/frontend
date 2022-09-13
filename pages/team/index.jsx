@@ -34,7 +34,7 @@ const Team = () => {
       name: "Ivy Saskia Sejas Rocabado",
       role: "System Engineer Student / Full Stack Blockchain Developer",
       place: "Cochabamba, Bolivia",
-      photo: "https://avatars.githubusercontent.com/u/41027286?s=64&v=4",
+      photo: "https://avatars.githubusercontent.com/u/41027286?v=4",
       gitHubUserName: "IvySaskia",      
       linkedInUserName: "ivy-rocabado",
       twitterUserName: "IvySaskia",
